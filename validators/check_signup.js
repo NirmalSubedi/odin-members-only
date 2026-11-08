@@ -1,6 +1,7 @@
 import { body } from "express-validator";
 
 const emptyError = "must not be empty.";
+const PASSWORD_MIN_LENGTH = 8;
 
 export const check_signup = [
   body("first_name").trim().notEmpty().withMessage(`First name ${emptyError}`),
@@ -11,7 +12,12 @@ export const check_signup = [
     .withMessage(`Email ${emptyError}`)
     .isEmail()
     .withMessage("Email must be formatted like: john@doe.com"),
-  body("password").trim().notEmpty().withMessage(`Password ${emptyError}`),
+  body("password")
+    .trim()
+    .notEmpty()
+    .withMessage(`Password ${emptyError}`)
+    .isLength({ min: PASSWORD_MIN_LENGTH })
+    .withMessage(`Password must be ${PASSWORD_MIN_LENGTH} characters long.`),
   body("confirm_password")
     .trim()
     .notEmpty()
