@@ -1,5 +1,5 @@
 import express from "express";
-import { validationResult } from "express-validator";
+import { matchedData, validationResult } from "express-validator";
 import { check_signup } from "./validators/check_signup.js";
 
 const app = express();
@@ -14,9 +14,11 @@ app.get("/signup", (req, res) => {
 });
 app.post("/signup", check_signup, (req, res) => {
   const errors = validationResult(req);
+  const values = matchedData(req, { onlyValidData: false });
 
   if (!errors.isEmpty()) {
     res.locals.errors = errors;
+    res.locals.values = values;
     return res.status(400).render("signup");
   }
 
