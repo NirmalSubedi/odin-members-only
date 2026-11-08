@@ -16,6 +16,6 @@ export const check_signup = [
     .trim()
     .notEmpty()
     .withMessage(`Confirm password ${emptyError}`)
-    .if((value, { req }) => req.body.password === value)
+    .custom((value, { req }) => req.body.password === value)
     .withMessage("Confirm password must match password."),
 ];
