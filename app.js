@@ -4,7 +4,7 @@ const app = express();
 
 app.set("view engine", "ejs");
 
-// app.get("/", (req, res) => res.render(""));
+app.get("/", (req, res) => res.render("signup"));
 
 app.listen(3000, (error) => {
   if (error) throw error;
