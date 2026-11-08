@@ -17,7 +17,9 @@ export const check_signup = [
     .notEmpty()
     .withMessage(`Password ${emptyError}`)
     .isLength({ min: PASSWORD_MIN_LENGTH })
-    .withMessage(`Password must be ${PASSWORD_MIN_LENGTH} characters long.`),
+    .withMessage(
+      `Password must be at least ${PASSWORD_MIN_LENGTH} characters long.`,
+    ),
   body("confirm_password")
     .trim()
     .notEmpty()
