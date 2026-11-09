@@ -1,6 +1,6 @@
 import express from "express";
 import { matchedData, validationResult } from "express-validator";
-import { check_signup } from "./validators/check_signup.js";
+import { check_signup } from "./controllers/validate.controller.js";
 
 const app = express();
 
