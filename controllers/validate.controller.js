@@ -4,6 +4,10 @@ import {
   LAST_NAME_COLUMN_MAX_LENGTH,
   PASSWORD_COLUMN_MAX_LENGTH,
   PASSWORD_MIN_LENGTH,
+  PASSWORD_MIN_LOWER_CASE,
+  PASSWORD_MIN_NUMBERS,
+  PASSWORD_MIN_SYMBOLS,
+  PASSWORD_MIN_UPPER_CASE,
 } from "../config.js";
 
 const emptyError = "must not be empty.";
@@ -30,12 +34,24 @@ export const check_signup = [
     .notEmpty()
     .withMessage(`Email ${emptyError}`)
     .isEmail()
-    .withMessage("Email must be formatted like: john@doe.com"),
+    .withMessage("Email must be formatted correctly (e.g., john@doe.com)."),
   body("password")
     .trim()
-    .isLength({ min: PASSWORD_MIN_LENGTH, max: PASSWORD_COLUMN_MAX_LENGTH })
+    .notEmpty()
+    .withMessage(`Password ${emptyError}`)
+    .isLength({ max: PASSWORD_COLUMN_MAX_LENGTH })
     .withMessage(
-      `Password must be between ${PASSWORD_MIN_LENGTH} and ${PASSWORD_COLUMN_MAX_LENGTH} characters.`,
+      `Password must be less than ${PASSWORD_COLUMN_MAX_LENGTH + 1} characters.`,
+    )
+    .isStrongPassword({
+      minLength: PASSWORD_MIN_LENGTH,
+      minLowerCase: PASSWORD_MIN_LOWER_CASE,
+      minUppercase: PASSWORD_MIN_UPPER_CASE,
+      minNumbers: PASSWORD_MIN_NUMBERS,
+      minSymbols: PASSWORD_MIN_SYMBOLS,
+    })
+    .withMessage(
+      `Password must at least be ${PASSWORD_MIN_LENGTH} characters long with ${PASSWORD_MIN_UPPER_CASE} uppercase character, ${PASSWORD_MIN_LOWER_CASE} lowercase character, ${PASSWORD_MIN_NUMBERS} number, and ${PASSWORD_MIN_SYMBOLS} symbol.`,
     ),
   body("confirm_password")
     .trim()
