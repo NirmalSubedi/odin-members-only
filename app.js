@@ -1,5 +1,6 @@
 import express from "express";
 import { matchedData, validationResult } from "express-validator";
+import { BAD_REQUEST } from "./config.js";
 import { check_signup } from "./controllers/validate.controller.js";
 
 const app = express();
@@ -19,7 +20,7 @@ app.post("/signup", check_signup, (req, res) => {
   if (!errors.isEmpty()) {
     res.locals.errors = errors;
     res.locals.values = values;
-    return res.status(400).render("signup");
+    return res.status(BAD_REQUEST).render("signup");
   }
 
   res.send("post signup");
