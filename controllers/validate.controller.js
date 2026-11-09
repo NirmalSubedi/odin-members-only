@@ -1,7 +1,7 @@
 import { body } from "express-validator";
+import { PASSWORD_MIN_LENGTH } from "../config.js";
 
 const emptyError = "must not be empty.";
-const PASSWORD_MIN_LENGTH = 8;
 
 export const check_signup = [
   body("first_name").trim().notEmpty().withMessage(`First name ${emptyError}`),
