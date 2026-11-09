@@ -1,3 +1,3 @@
 ### Environment variables
 
-See [.env.example](./.env.example) for necessary variables. For expected file rename see [package.json](./package.json) scripts.
+See [.env.example](./.env.example) for necessary variables. For file rename see `scripts` section in [package.json](./package.json).
