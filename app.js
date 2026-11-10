@@ -11,7 +11,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => res.render("home"));
 
-app.route("/join_club").get((req, res) => res.render("join_club"));
+app
+  .route("/join_club")
+  .get((req, res) => res.render("join_club"))
+  .post((req, res) => res.send("post_join_club"));
 
 app
   .route("/signup")
