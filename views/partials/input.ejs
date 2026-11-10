@@ -1,0 +1,9 @@
+<label for="<%= locals.name %>"><%= locals.label %></label>
+<input
+  type="<%= locals.type || 'text' %>"
+  placeholder="<%= locals.placeholder || '' %>"
+  name="<%= locals.name %>"
+  id="<%= locals.name %>"
+  aria-describedby="<%= locals.name %>_error"
+  value="<%= locals.value || ''  %>"
+>
