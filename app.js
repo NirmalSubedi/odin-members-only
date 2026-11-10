@@ -55,6 +55,15 @@ app
     res.render("login");
   })
   .post(check_login, (req, res) => {
+    const errors = validationResult(req);
+    const values = matchedData(req, { onlyValidData: false });
+
+    if (!errors.isEmpty()) {
+      res.locals.errors = errors;
+      res.locals.values = values;
+      return res.status(BAD_REQUEST).render("login");
+    }
+
     res.send("post login");
   });
 
