@@ -6,6 +6,16 @@
     <%- include('partials/title', {title:'Join the club'}) %>
   </head>
   <body>
-    <h1>Join the club</h1>    
+    <h1>Join the club</h1>
+    <form action="/join_club" method="post">
+      <label for="club_secret">What do you call a funny mountain???</label>
+      <input
+        type="club_secret"
+        placeholder="Enter your answer..."
+        name="club_secret"
+        id="club_secret"
+      >
+      <button type="submit">Guess</button>
+    </form>
   </body>
 </html>
