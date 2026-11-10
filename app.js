@@ -1,7 +1,10 @@
 import express from "express";
 import { matchedData, validationResult } from "express-validator";
 import { BAD_REQUEST } from "./config.js";
-import { check_signup } from "./controllers/validate.controller.js";
+import {
+  check_join_club,
+  check_signup,
+} from "./controllers/validate.controller.js";
 
 const app = express();
 
@@ -14,7 +17,7 @@ app.get("/", (req, res) => res.render("home"));
 app
   .route("/join_club")
   .get((req, res) => res.render("join_club"))
-  .post((req, res) => {
+  .post(check_join_club, (req, res) => {
     const errors = validationResult(req);
     const values = matchedData(req, { onlyValidData: false });
 

@@ -69,5 +69,5 @@ export const check_join_club = [
     .withMessage("Try to guess.")
     .toLowerCase()
     .custom((value, { req }) => req.body.club_secret === CLUB_SECRET)
-    .withMessage("No silly :p"),
+    .withMessage("No silly 😜"),
 ];
