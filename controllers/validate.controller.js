@@ -34,6 +34,7 @@ export const check_signup = [
     .trim()
     .notEmpty()
     .withMessage(`Email ${emptyError}`)
+    .bail()
     .isEmail()
     .withMessage("Email must be formatted correctly (e.g., john@doe.com)."),
   body("password")
@@ -44,6 +45,7 @@ export const check_signup = [
     .withMessage(
       `Password must be less than ${PASSWORD_COLUMN_MAX_LENGTH + 1} characters.`,
     )
+    .bail()
     .isStrongPassword({
       minLength: PASSWORD_MIN_LENGTH,
       minLowerCase: PASSWORD_MIN_LOWER_CASE,
@@ -58,6 +60,7 @@ export const check_signup = [
     .trim()
     .notEmpty()
     .withMessage(`Confirm password ${emptyError}`)
+    .bail()
     .custom((value, { req }) => req.body.password === value)
     .withMessage("Confirm password must match password."),
 ];
