@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1>Sign up</h1>
-    <%- include('partials/errors') %>
+    <%- include('partials/errors', {list_name: 'Field errors:'}) %>
     <form action="/signup" method="post">
       <label for="first_name">First name</label>
       <input
