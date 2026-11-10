@@ -14,6 +14,8 @@
         placeholder="Enter your answer..."
         name="club_secret"
         id="club_secret"
+        aria-describedby="club_secret_error"
+        value="<%= locals.values?.club_secret || '' %>"
       >
       <button type="submit">Guess</button>
     </form>

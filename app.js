@@ -14,7 +14,18 @@ app.get("/", (req, res) => res.render("home"));
 app
   .route("/join_club")
   .get((req, res) => res.render("join_club"))
-  .post((req, res) => res.send("post_join_club"));
+  .post((req, res) => {
+    const errors = validationResult(req);
+    const values = matchedData(req, { onlyValidData: false });
+
+    if (!errors.isEmpty()) {
+      res.locals.errors = errors;
+      res.locals.values = values;
+      return res.status(BAD_REQUEST).render("join_club");
+    }
+
+    res.send("post_join_club");
+  });
 
 app
   .route("/signup")
