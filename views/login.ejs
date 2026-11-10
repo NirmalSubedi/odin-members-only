@@ -11,22 +11,8 @@
     <%- include('partials/errors', {list_name: 'Field errors:'}) %>
     <form action="/login" method="post">
       <label for="username">Email</label>
-      <input
-        type="email"
-        placeholder="john@doe.com"
-        name="username"
-        id="username"
-        aria-describedby="username_error"
-        value="<%= locals.values?.username || '' %>"
-      >
-      <label for="password">Password</label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        aria-describedby="password_error"
-        value="<%= locals.values?.password || ''  %>"
-      >
+      <%- include('partials/input', {label:'Email', name:'username', type:'email', placeholder:'john@doe.com'}) %>
+      <%- include('partials/input', {label:'Password', name:'password', type:'password'}) %>
       <button type="submit">Log in</button>
     </form>
   </body>
