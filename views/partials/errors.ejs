@@ -3,7 +3,7 @@
   <p><%= locals.list_name %></p>
   <ul>
     <% errors.array().forEach(error => { %>
-    <li id="<%= error.path + '_error' %>"><%= error.msg %></li>
+    <li id="<%= error.path + '_error' %>"><%= error.msg %> <a href="#<%= error.path %>">Jump</a></li>
     <% }) %>  
   </ul>
 </div>

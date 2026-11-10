@@ -1,9 +1,11 @@
-<label for="<%= locals.name %>"><%= locals.label %></label>
-<input
-  type="<%= locals.type || 'text' %>"
-  name="<%= locals.name %>"
-  placeholder="<%= locals.placeholder || '' %>"
-  id="<%= locals.name %>"
-  aria-describedby="<%= locals.name %>_error"
-  value="<%= locals.value?.[locals.name] || ''  %>"
->
+<div>
+  <label for="<%= locals.name %>"><%= locals.label %></label>
+  <input
+    type="<%= locals.type || 'text' %>"
+    name="<%= locals.name %>"
+    placeholder="<%= locals.placeholder || '' %>"
+    id="<%= locals.name %>"
+    aria-describedby="<%= locals.name %>_error"
+    value="<%= locals.value?.[locals.name] || ''  %>"
+  >
+</div>
