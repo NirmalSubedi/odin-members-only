@@ -10,49 +10,11 @@
     <h1>Sign up</h1>
     <%- include('partials/errors', {list_name: 'Field errors:'}) %>
     <form action="/signup" method="post">
-      <label for="first_name">First name</label>
-      <input
-        type="text"
-        placeholder="John"
-        name="first_name"
-        id="first_name"
-        aria-describedby="first_name_error"
-        value="<%= locals.values?.first_name || ''  %>"
-      >
-      <label for="last_name">Last name</label>
-      <input
-        type="text"
-        placeholder="Doe"
-        name="last_name"
-        id="last_name"
-        aria-describedby="last_name_error"
-        value="<%= locals.values?.last_name || ''  %>"
-      >
-      <label for="username">Email</label>
-      <input
-        type="email"
-        placeholder="john@doe.com"
-        name="username"
-        id="username"
-        aria-describedby="username_error"
-        value="<%= locals.values?.username || ''  %>"
-      >
-      <label for="password">Password</label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        aria-describedby="password_error"
-        value="<%= locals.values?.password || ''  %>"
-      >
-      <label for="confirm_password">Confirm password</label>
-      <input
-        type="password"
-        name="confirm_password"
-        id="confirm_password"
-        aria-describedby="confirm_password_error"
-        value="<%= locals.values?.confirm_password || ''  %>"
-      >
+      <%- include('partials/input', {label:'First name', name:'first_name', placeholder:'John'}) %>
+      <%- include('partials/input', {label:'Last name', name:'last_name', placeholder:'Doe'}) %>
+      <%- include('partials/input', {label:'Email', name:'username', type:'email', placeholder:'john@doe.com'}) %>
+      <%- include('partials/input', {label:'Password', name:'password', type:'password'}) %>
+      <%- include('partials/input', {label:'Confirm password', name:'confirm_password', type:'password'}) %>
       <button type="submit">Sign up</button>
     </form>
   </body>
