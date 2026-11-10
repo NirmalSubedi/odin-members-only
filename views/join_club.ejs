@@ -10,15 +10,7 @@
     <h1>Join club</h1>
     <%- include('partials/errors', {list_name: 'Errors:'}) %>
     <form action="/join_club" method="post">
-      <label for="club_secret">What do you call a funny mountain???</label>
-      <input
-        type="club_secret"
-        placeholder="Enter your answer..."
-        name="club_secret"
-        id="club_secret"
-        aria-describedby="club_secret_error"
-        value="<%= locals.values?.club_secret || '' %>"
-      >
+      <%- include('partials/input', {label:'What do you call a funny mountain???', name:'club_secret', placeholder:'Enter you guess...'}) %>
       <button type="submit">Guess</button>
     </form>
   </body>
