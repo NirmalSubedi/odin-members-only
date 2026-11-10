@@ -11,6 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => res.render("home"));
 
+app.route("/join_club").get((req, res) => res.render("join_club"));
+
 app
   .route("/signup")
   .get((req, res) => {
