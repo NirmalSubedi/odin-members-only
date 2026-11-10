@@ -6,6 +6,7 @@
     <%- include('partials/title', {title:'Join the club'}) %>
   </head>
   <body>
+    <%- include('partials/nav') %>
     <h1>Join the club</h1>
     <%- include('partials/errors', {list_name: 'Errors:'}) %>
     <form action="/join_club" method="post">
