@@ -3,6 +3,7 @@ import { matchedData, validationResult } from "express-validator";
 import { BAD_REQUEST } from "./config.js";
 import {
   check_join_club,
+  check_login,
   check_signup,
 } from "./controllers/validate.controller.js";
 
@@ -53,7 +54,7 @@ app
   .get((req, res) => {
     res.render("login");
   })
-  .post((req, res) => {
+  .post(check_login, (req, res) => {
     res.send("post login");
   });
 

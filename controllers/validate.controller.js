@@ -75,3 +75,8 @@ export const check_join_club = [
     .custom((value, { req }) => req.body.club_secret === CLUB_SECRET)
     .withMessage("Nice try, but no silly :p"),
 ];
+
+export const check_login = [
+  body("username").trim().notEmpty().withMessage(`Username ${emptyError}`),
+  body("password").trim().notEmpty().withMessage(`Password ${emptyError}`),
+];
