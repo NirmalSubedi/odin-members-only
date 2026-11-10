@@ -48,6 +48,15 @@ app
     res.send("post signup");
   });
 
+app
+  .route("/login")
+  .get((req, res) => {
+    res.render("login");
+  })
+  .post((req, res) => {
+    res.send("post login");
+  });
+
 app.listen(3000, (error) => {
   if (error) throw error;
   console.log("App running on port 3000");
