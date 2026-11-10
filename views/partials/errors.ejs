@@ -1,0 +1,10 @@
+<% if (locals.errors) { %>
+<div class="errors">
+  <p>Field errors:</p>
+  <ul>
+    <% errors.array().forEach(error => { %>
+    <li id="<%= error.path + '_error' %>"><%= error.msg %></li>
+    <% }) %>  
+  </ul>
+</div>
+<% } %>

@@ -7,16 +7,7 @@
   </head>
   <body>
     <h1>Sign up</h1>
-    <% if (locals.errors) { %>
-    <div class="errors">
-      <p>Field errors:</p>
-      <ul>
-        <% errors.array().forEach(error => { %>
-        <li id="<%= error.path + '_error' %>"><%= error.msg %></li>
-        <% }) %>  
-      </ul>
-    </div>
-    <% } %>
+    <%- include('partials/errors') %>
     <form action="/signup" method="post">
       <label for="first_name">First name</label>
       <input
