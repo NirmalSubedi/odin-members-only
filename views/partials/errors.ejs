@@ -1,6 +1,6 @@
 <% if (locals.errors) { %>
 <div class="errors">
-  <p><%= locals.list_name %></p>
+  <p>(<%= locals.errors.array().length %>) <%= locals.list_name %></p>
   <ul>
     <% errors.array().forEach(error => { %>
     <li id="<%= error.path + '_error' %>"><%= error.msg %> <a href="#<%= error.path %>">Jump</a></li>
