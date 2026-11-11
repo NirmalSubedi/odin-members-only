@@ -6,7 +6,7 @@
     placeholder="<%= locals.placeholder || '' %>"
     id="<%= locals.name %>"
     aria-describedby="<%= locals.name %>_error"
-    value="<%= locals.values?.[locals.name] || ''  %>"
+    <%if(locals.values?.[locals.name]){%>value='<%= values[locals.name] %>'<% } %>
     <%if(locals.required){%>required<% } %>
     <%if(locals?.errors?.map?.[locals.name]) {%>aria-invalid="true"<% } %>
   >
