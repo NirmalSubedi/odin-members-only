@@ -1,5 +1,5 @@
 <div>
-  <label for="<%= locals.name %>"><%= locals.label %><%= locals.required ? '*' : '' %></label>
+  <label for="<%= locals.name %>"><%= locals.label %><% if(locals.required){%><span aria-label="required">*</span><% } %></label>
   <input
     type="<%= locals.type || 'text' %>"
     name="<%= locals.name %>"
@@ -8,5 +8,6 @@
     aria-describedby="<%= locals.name %>_error"
     value="<%= locals.values?.[locals.name] || ''  %>"
     <%if(locals.required){%>required<% } %>
+    <%if(locals?.errors?.map?.[locals.name]) {%>aria-invalid="true"<% } %>
   >
 </div>
