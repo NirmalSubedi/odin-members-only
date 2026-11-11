@@ -47,7 +47,7 @@ app
   });
 
 app
-  .route("/new")
+  .route("/new_post")
   .get((req, res) => {
     res.render("new_post");
   })
