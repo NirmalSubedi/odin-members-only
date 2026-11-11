@@ -1,7 +1,7 @@
 <% if (locals.errors) { %>
 <div class="errors" tabindex="-1" autofocus="">
   <% const errorsList = errors.array({onlyFirstError:true}) %>
-  <p>(<%= errorsList.length %>) <%= locals.list_name %></p>
+  <p>(<%= errorsList.length %>) <%= locals.list_name ?? locals.get_list_name(errorsList) %></p>
   <ul>
     <% errorsList.forEach(error => { %>
     <li id="<%= error.path + '_error' %>"><a href="#<%=error.path%>"><%= error.msg %></a></li>
