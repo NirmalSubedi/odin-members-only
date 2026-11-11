@@ -17,3 +17,13 @@ export const insertUser = (user) => {
   ]);
   return rows;
 };
+
+export const insertPost = (post) => {
+  const queryText = `
+  INSERT INTO 
+  posts(username, title, body)
+  VALUES($1, $2, $3)`;
+  const { username, title, body } = post;
+  const { rows } = pool.queryText(queryText, [username, title, body]);
+  return rows;
+};
