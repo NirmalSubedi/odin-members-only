@@ -11,7 +11,7 @@ import {
   PASSWORD_MIN_UPPER_CASE,
 } from "../config.js";
 
-const emptyError = "must not be empty.";
+const emptyError = "must be filled.";
 
 const get_username_field_chain = () =>
   body("username")
