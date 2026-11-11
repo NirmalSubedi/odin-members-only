@@ -25,7 +25,8 @@ export const missing_resource_response = (req, res, next) => {
 
 export const not_found_handler = (error, req, res, next) => {
   if (error.statusCode !== NOT_FOUND) return next(error);
-  res.status(NOT_FOUND).send(error.message);
+  res.locals.message = error.message;
+  res.status(NOT_FOUND).render("page_not_found");
 };
 
 export const server_error_handler = (error, req, res, next) => {
