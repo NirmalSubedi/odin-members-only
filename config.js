@@ -6,6 +6,7 @@ export const connectionString = process.env.DATABASE_URL;
 // HTTP status codes
 export const BAD_REQUEST = 400;
 export const NOT_FOUND = 404;
+export const INTERNAL_SERVER_ERROR = 500;
 
 // DB values
 export const FIRST_NAME_COLUMN_MAX_LENGTH = 255;
