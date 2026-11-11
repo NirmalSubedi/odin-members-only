@@ -10,6 +10,7 @@
     <h1>Sign up</h1>
     <%- include('partials/errors', {list_name: 'Field errors:'}) %>
     <form action="/signup" method="post">
+      <p>Fields with (*) are required.</p>
       <%- include('partials/input', {label:'First name', name:'first_name', placeholder:'John', required: true}) %>
       <%- include('partials/input', {label:'Last name', name:'last_name', placeholder:'Doe', required: true}) %>
       <%- include('partials/input', {label:'Email', name:'username', type:'email', placeholder:'john@doe.com', required: true}) %>
