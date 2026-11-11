@@ -8,13 +8,15 @@
   <body>
     <h1>New post</h1>
     <%- include('partials/errors', {list_name: 'Field errors:'}) %>
-    <form action="/new" method="post">
+    <form action="/new_post" method="post">
       <p>Fields with (*) are required.</p>
       <%- include('partials/input', {label:'Title', name:'title', placeholder:'Enter post title...', required: true}) %>
-      <label for="body">Body</label>
-      <textarea name="body" id="body" placeholder="Enter post body...">
-
-      </textarea>
+      <div>
+        <label for="body">Body<span aria-label="required">*</span></label>
+        <textarea name="body" id="body" aria-describedby="body_error" required <%if(locals?.errors?.map?.['body']) {%>aria-invalid="true"<% } %>>
+            <%if(locals.values?.['body']){%><%= values['body'] %><% } %>
+          </textarea>
+      </div>
       <button type="submit">Post</button>
     </form>
   </body>
