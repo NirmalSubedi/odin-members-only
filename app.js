@@ -50,12 +50,13 @@ app
     res.send("post login");
   });
 
-app.use((err, req, res, next) => {
+const bad_request_handler = (err, req, res, next) => {
   if (err.statusCode !== BAD_REQUEST) return next(err);
   res.locals.errors = validationResult(req);
   res.locals.values = matchedData(req, { onlyValidData: false });
   res.status(BAD_REQUEST).render(err.page);
-});
+};
+app.use(bad_request_handler);
 
 app.listen(3000, (error) => {
   if (error) throw error;
