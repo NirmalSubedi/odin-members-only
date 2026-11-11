@@ -84,3 +84,8 @@ export const check_login = [
   get_username_field_chain(),
   get_password_field_chain(),
 ];
+
+export const check_new_post = [
+  body("title").trim().notEmpty().withMessage(`Post title ${emptyError}`),
+  body("body").trim().notEmpty().withMessage(`Post body ${emptyError}`),
+];
