@@ -10,7 +10,7 @@
     <%- include('partials/errors', {list_name: 'Field errors:'}) %>
     <form action="/new" method="post">
       <p>Fields with (*) are required.</p>
-      <%- include('partials/input', {label:'Title', name:'title', placeholder:'Enter post title...' required: true}) %>
+      <%- include('partials/input', {label:'Title', name:'title', placeholder:'Enter post title...', required: true}) %>
       <label for="body">Body</label>
       <textarea name="body" id="body" placeholder="Enter post body...">
 
