@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => res.render("home"));
 
-const correct_values_on = (page) => (req, res, next) => {
+const correct_values_for = (page) => (req, res, next) => {
   try {
     validationResult(req).throw();
     next();
@@ -28,7 +28,7 @@ const correct_values_on = (page) => (req, res, next) => {
 app
   .route("/join_club")
   .get((req, res) => res.render("join_club"))
-  .post(check_join_club, correct_values_on("join_club"), (req, res) => {
+  .post(check_join_club, correct_values_for("join_club"), (req, res) => {
     res.send("post_join_club");
   });
 
@@ -37,7 +37,7 @@ app
   .get((req, res) => {
     res.render("signup");
   })
-  .post(check_signup, correct_values_on("signup"), (req, res) => {
+  .post(check_signup, correct_values_for("signup"), (req, res) => {
     res.send("post signup");
   });
 
@@ -46,7 +46,7 @@ app
   .get((req, res) => {
     res.render("login");
   })
-  .post(check_login, correct_values_on("login"), (req, res) => {
+  .post(check_login, correct_values_for("login"), (req, res) => {
     res.send("post login");
   });
 
