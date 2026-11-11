@@ -17,3 +17,10 @@ export const bad_request_handler = (err, req, res, next) => {
   res.locals.values = matchedData(req, { onlyValidData: false });
   res.status(BAD_REQUEST).render(err.page);
 };
+
+export const serverErrorHandler = (error, req, res, next) => {
+  console.error(error);
+  res
+    .status(error.statusCode || INTERNAL_SERVER_ERROR)
+    .send("Something is wrong with the server. Try again later.");
+};
