@@ -8,10 +8,10 @@
   <body>
     <%- include('partials/nav') %>
     <h1>Join club</h1>
-    <%- include('partials/errors', {get_list_name: (errors)=> errors.length > 1 ? 'Errors:' : 'Error:'}) %>
+    <%- include('partials/errors', {get_list_name: (errors)=> `Error${errors.length>1?'s':''}:`}) %>
     <form action="/join_club" method="post">
       <p>Field with (*) is required.</p>
-      <%- include('partials/input', {label:'What do you call a funny mountain???', name:'club_secret', placeholder:'Enter you guess...', required:true }) %>
+      <%- include('partials/input', {label:'What do you call a funny mountain?', name:'club_secret', placeholder:'Enter you guess...', required:true }) %>
       <button type="submit">Guess</button>
     </form>
   </body>
