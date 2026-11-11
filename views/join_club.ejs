@@ -10,7 +10,7 @@
     <h1>Join club</h1>
     <%- include('partials/errors', {list_name: 'Errors:'}) %>
     <form action="/join_club" method="post">
-      <%- include('partials/input', {label:'What do you call a funny mountain???', name:'club_secret', placeholder:'Enter you guess...'}) %>
+      <%- include('partials/input', {label:'What do you call a funny mountain???', name:'club_secret', placeholder:'Enter you guess...', required:true }) %>
       <button type="submit">Guess</button>
     </form>
   </body>
