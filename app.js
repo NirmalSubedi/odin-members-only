@@ -9,6 +9,7 @@ import {
 import {
   check_join_club,
   check_login,
+  check_new_post,
   check_signup,
 } from "./controllers/validate_controller.js";
 
@@ -43,6 +44,15 @@ app
   })
   .post(check_login, correct_values_for("login"), (req, res) => {
     res.send("post login");
+  });
+
+app
+  .route("/new")
+  .get((req, res) => {
+    res.render("new_post");
+  })
+  .post(check_new_post, correct_values_for("new_post"), (req, res) => {
+    res.send("post new post");
   });
 
 app.use(missing_resource_response);
