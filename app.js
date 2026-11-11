@@ -2,6 +2,8 @@ import express from "express";
 import {
   bad_request_handler,
   correct_values_for,
+  missing_resource_response,
+  not_found_handler,
   server_error_handler,
 } from "./controllers/error_controller.js";
 import {
@@ -43,7 +45,9 @@ app
     res.send("post login");
   });
 
+app.use(missing_resource_response);
 app.use(bad_request_handler);
+app.use(not_found_handler);
 app.use(server_error_handler);
 
 app.listen(3000, (error) => {
