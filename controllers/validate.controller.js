@@ -19,7 +19,9 @@ const get_username_field_chain = () =>
     .notEmpty()
     .withMessage(`Email ${emptyError}`)
     .isEmail()
-    .withMessage("Email must be formatted correctly (e.g., john@doe.com).");
+    .withMessage(
+      "Email must be formatted correctly (e.g., johndoe@example.com).",
+    );
 
 const get_password_field_chain = () =>
   body("password")

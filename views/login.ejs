@@ -11,7 +11,7 @@
     <%- include('partials/errors', {list_name: 'Field errors:'}) %>
     <form action="/login" method="post">
       <p>Fields with (*) are required.</p>
-      <%- include('partials/input', {label:'Email', name:'username', type:'email', placeholder:'john@doe.com', required:true }) %>
+      <%- include('partials/input', {label:'Email', name:'username', type:'email', placeholder:'johndoe@example.com', required:true }) %>
       <%- include('partials/input', {label:'Password', name:'password', type:'password',required:true }) %>
       <button type="submit">Log in</button>
     </form>
