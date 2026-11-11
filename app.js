@@ -1,12 +1,10 @@
 import express from "express";
-import { matchedData, validationResult } from "express-validator";
-import { BAD_REQUEST } from "./config.js";
 import {
   check_join_club,
   check_login,
   check_signup,
 } from "./controllers/validate.controller.js";
-import { BadRequestError } from "./errors/BadRequestError.js";
+import { bad_request_handler, correct_values_for } from "./error_controller.js";
 
 const app = express();
 
@@ -15,15 +13,6 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => res.render("home"));
-
-const correct_values_for = (page) => (req, res, next) => {
-  try {
-    validationResult(req).throw();
-    next();
-  } catch (error) {
-    next(new BadRequestError("Client validation error(s).", page));
-  }
-};
 
 app
   .route("/join_club")
@@ -50,12 +39,6 @@ app
     res.send("post login");
   });
 
-const bad_request_handler = (err, req, res, next) => {
-  if (err.statusCode !== BAD_REQUEST) return next(err);
-  res.locals.errors = validationResult(req);
-  res.locals.values = matchedData(req, { onlyValidData: false });
-  res.status(BAD_REQUEST).render(err.page);
-};
 app.use(bad_request_handler);
 
 app.listen(3000, (error) => {
