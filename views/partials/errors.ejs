@@ -1,6 +1,6 @@
 <% if (locals.errors) { %>
 <div class="errors">
-  <% const errorsList = errors.array() %>
+  <% const errorsList = errors.errors %>
   <p>(<%= errorsList.length %>) <%= locals.list_name %></p>
   <ul>
     <% errorsList.forEach(error => { %>
