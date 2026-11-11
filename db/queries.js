@@ -7,7 +7,7 @@ export const insertUser = (user) => {
     VALUES($1, $2, $3, $4, $5, $6)`;
   const { first_name, last_name, username, password, is_member, is_admin } =
     user;
-  const { rows } = pool.queryText(queryText, [
+  const { rows } = pool.query(queryText, [
     first_name,
     last_name,
     username,
@@ -24,6 +24,6 @@ export const insertPost = (post) => {
   posts(username, title, body)
   VALUES($1, $2, $3)`;
   const { username, title, body } = post;
-  const { rows } = pool.queryText(queryText, [username, title, body]);
+  const { rows } = pool.query(queryText, [username, title, body]);
   return rows;
 };
