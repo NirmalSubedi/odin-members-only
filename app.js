@@ -7,7 +7,7 @@ import {
   check_join_club,
   check_login,
   check_signup,
-} from "./controllers/validate.controller.js";
+} from "./controllers/validate_controller.js";
 
 const app = express();
 
