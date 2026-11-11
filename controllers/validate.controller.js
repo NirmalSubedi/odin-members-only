@@ -13,6 +13,14 @@ import {
 
 const emptyError = "must not be empty.";
 
+const get_username_field_chain = () =>
+  body("username")
+    .trim()
+    .notEmpty()
+    .withMessage(`Email ${emptyError}`)
+    .isEmail()
+    .withMessage("Email must be formatted correctly (e.g., john@doe.com).");
+
 export const check_signup = [
   body("first_name")
     .trim()
@@ -30,12 +38,7 @@ export const check_signup = [
     .withMessage(
       `Last name must be less than ${LAST_NAME_COLUMN_MAX_LENGTH + 1} characters.`,
     ),
-  body("username")
-    .trim()
-    .notEmpty()
-    .withMessage(`Email ${emptyError}`)
-    .isEmail()
-    .withMessage("Email must be formatted correctly (e.g., john@doe.com)."),
+  get_username_field_chain(),
   body("password")
     .trim()
     .notEmpty()
@@ -73,6 +76,6 @@ export const check_join_club = [
 ];
 
 export const check_login = [
-  body("username").trim().notEmpty().withMessage(`Username ${emptyError}`),
+  get_username_field_chain(),
   body("password").trim().notEmpty().withMessage(`Password ${emptyError}`),
 ];
