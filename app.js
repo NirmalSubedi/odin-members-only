@@ -2,7 +2,7 @@ import express from "express";
 import {
   bad_request_handler,
   correct_values_for,
-  serverErrorHandler,
+  server_error_handler,
 } from "./controllers/error_controller.js";
 import {
   check_join_club,
@@ -44,7 +44,7 @@ app
   });
 
 app.use(bad_request_handler);
-app.use(serverErrorHandler);
+app.use(server_error_handler);
 
 app.listen(3000, (error) => {
   if (error) throw error;

@@ -18,7 +18,7 @@ export const bad_request_handler = (err, req, res, next) => {
   res.status(BAD_REQUEST).render(err.page);
 };
 
-export const serverErrorHandler = (error, req, res, next) => {
+export const server_error_handler = (error, req, res, next) => {
   console.error(error);
   res
     .status(error.statusCode || INTERNAL_SERVER_ERROR)
