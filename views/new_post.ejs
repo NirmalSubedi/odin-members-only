@@ -14,9 +14,7 @@
       <%- include('partials/input', {label:'Title', name:'title', placeholder:'Enter post title...', required: true}) %>
       <div>
         <label for="body">Body<span aria-label="required">*</span></label>
-        <textarea name="body" id="body" aria-describedby="body_error" required <%if(locals?.errors?.map?.['body']) {%>aria-invalid="true"<% } %>>
-            <%if(locals.values?.['body']){%><%= values['body'] %><% } %>
-          </textarea>
+        <textarea name="body" id="body" placeholder="Enter post body..." aria-describedby="body_error" required <%if(locals?.errors?.map?.['body']) {%>aria-invalid="true"<% } %>><%if(locals.values?.['body']){%><%= values['body'] %><% } %></textarea>
       </div>
       <button type="submit">Post</button>
     </form>
