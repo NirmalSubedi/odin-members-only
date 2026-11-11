@@ -1,10 +1,13 @@
 import express from "express";
 import {
+  bad_request_handler,
+  correct_values_for,
+} from "./controllers/error_controller.js";
+import {
   check_join_club,
   check_login,
   check_signup,
 } from "./controllers/validate.controller.js";
-import { bad_request_handler, correct_values_for } from "./error_controller.js";
 
 const app = express();
 
