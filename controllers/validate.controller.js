@@ -21,6 +21,26 @@ const get_username_field_chain = () =>
     .isEmail()
     .withMessage("Email must be formatted correctly (e.g., john@doe.com).");
 
+const get_password_field_chain = () =>
+  body("password")
+    .trim()
+    .notEmpty()
+    .withMessage(`Password ${emptyError}`)
+    .isLength({ max: PASSWORD_COLUMN_MAX_LENGTH })
+    .withMessage(
+      `Password must be less than ${PASSWORD_COLUMN_MAX_LENGTH + 1} characters.`,
+    )
+    .isStrongPassword({
+      minLength: PASSWORD_MIN_LENGTH,
+      minLowerCase: PASSWORD_MIN_LOWER_CASE,
+      minUppercase: PASSWORD_MIN_UPPER_CASE,
+      minNumbers: PASSWORD_MIN_NUMBERS,
+      minSymbols: PASSWORD_MIN_SYMBOLS,
+    })
+    .withMessage(
+      `Password must at least be ${PASSWORD_MIN_LENGTH} characters long with ${PASSWORD_MIN_UPPER_CASE} uppercase character, ${PASSWORD_MIN_LOWER_CASE} lowercase character, ${PASSWORD_MIN_NUMBERS} number, and ${PASSWORD_MIN_SYMBOLS} symbol.`,
+    );
+
 export const check_signup = [
   body("first_name")
     .trim()
@@ -39,24 +59,7 @@ export const check_signup = [
       `Last name must be less than ${LAST_NAME_COLUMN_MAX_LENGTH + 1} characters.`,
     ),
   get_username_field_chain(),
-  body("password")
-    .trim()
-    .notEmpty()
-    .withMessage(`Password ${emptyError}`)
-    .isLength({ max: PASSWORD_COLUMN_MAX_LENGTH })
-    .withMessage(
-      `Password must be less than ${PASSWORD_COLUMN_MAX_LENGTH + 1} characters.`,
-    )
-    .isStrongPassword({
-      minLength: PASSWORD_MIN_LENGTH,
-      minLowerCase: PASSWORD_MIN_LOWER_CASE,
-      minUppercase: PASSWORD_MIN_UPPER_CASE,
-      minNumbers: PASSWORD_MIN_NUMBERS,
-      minSymbols: PASSWORD_MIN_SYMBOLS,
-    })
-    .withMessage(
-      `Password must at least be ${PASSWORD_MIN_LENGTH} characters long with ${PASSWORD_MIN_UPPER_CASE} uppercase character, ${PASSWORD_MIN_LOWER_CASE} lowercase character, ${PASSWORD_MIN_NUMBERS} number, and ${PASSWORD_MIN_SYMBOLS} symbol.`,
-    ),
+  get_password_field_chain(),
   body("confirm_password")
     .trim()
     .notEmpty()
@@ -77,5 +80,5 @@ export const check_join_club = [
 
 export const check_login = [
   get_username_field_chain(),
-  body("password").trim().notEmpty().withMessage(`Password ${emptyError}`),
+  get_password_field_chain(),
 ];
