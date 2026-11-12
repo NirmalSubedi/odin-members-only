@@ -12,6 +12,7 @@ export const INTERNAL_SERVER_ERROR = 500;
 export const FIRST_NAME_COLUMN_MAX_LENGTH = 255;
 export const LAST_NAME_COLUMN_MAX_LENGTH = 255;
 export const PASSWORD_COLUMN_MAX_LENGTH = 50; // See link for reason: https://security.stackexchange.com/questions/39849/does-bcrypt-have-a-maximum-password-length
+export const USERNAME_COLUMN_MAX_LENGTH = 254; // See link for reason: https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
 
 // Form constraints
 export const PASSWORD_MIN_LENGTH = 8;
