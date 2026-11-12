@@ -9,6 +9,7 @@ import {
   PASSWORD_MIN_NUMBERS,
   PASSWORD_MIN_SYMBOLS,
   PASSWORD_MIN_UPPER_CASE,
+  USERNAME_COLUMN_MAX_LENGTH,
 } from "../config.js";
 
 const empty_error = "must be filled.";
@@ -18,6 +19,10 @@ const get_username_field_chain = () =>
     .trim()
     .notEmpty()
     .withMessage(`Email ${empty_error}`)
+    .isLength({ max: USERNAME_COLUMN_MAX_LENGTH })
+    .withMessage(
+      `Email must not exceed ${USERNAME_COLUMN_MAX_LENGTH} characters.`,
+    )
     .isEmail()
     .withMessage(
       "Email must be formatted correctly (e.g., johndoe@example.com).",
