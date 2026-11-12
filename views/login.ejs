@@ -13,6 +13,8 @@
       <p>Fields with (*) are required.</p>
       <%- include('partials/input', {label:'Email', name:'username', type:'email', placeholder:'johndoe@example.com', required:true }) %>
       <%- include('partials/input', {label:'Password', name:'password', type:'password',required:true }) %>
+      <label for="is_admin">Are you an admin?</label>
+      <input type="checkbox" name="is_admin" id="is_admin">
       <button type="submit">Log in</button>
     </form>
   </body>
