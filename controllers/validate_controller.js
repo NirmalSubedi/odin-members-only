@@ -1,5 +1,6 @@
 import { body } from "express-validator";
 import {
+  BODY_MAX_LENGTH,
   CLUB_SECRET,
   FIRST_NAME_COLUMN_MAX_LENGTH,
   LAST_NAME_COLUMN_MAX_LENGTH,
@@ -9,6 +10,7 @@ import {
   PASSWORD_MIN_NUMBERS,
   PASSWORD_MIN_SYMBOLS,
   PASSWORD_MIN_UPPER_CASE,
+  TITLE_MAX_LENGTH,
   USERNAME_COLUMN_MAX_LENGTH,
 } from "../config.js";
 
@@ -91,6 +93,16 @@ export const check_login = [
 ];
 
 export const check_new_post = [
-  body("title").trim().notEmpty().withMessage(`Post title ${empty_error}`),
-  body("body").trim().notEmpty().withMessage(`Post body ${empty_error}`),
+  body("title")
+    .trim()
+    .notEmpty()
+    .withMessage(`Post title ${empty_error}`)
+    .isLength({ max: TITLE_MAX_LENGTH })
+    .withMessage(`Post title must not exceed ${TITLE_MAX_LENGTH} characters.`),
+  body("body")
+    .trim()
+    .notEmpty()
+    .withMessage(`Post body ${empty_error}`)
+    .isLength({ max: BODY_MAX_LENGTH })
+    .withMessage(`Post body must not exceed ${BODY_MAX_LENGTH} characters.`),
 ];
