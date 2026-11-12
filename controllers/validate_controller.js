@@ -30,7 +30,7 @@ const get_password_field_chain = () =>
     .withMessage(`Password ${empty_error}`)
     .isLength({ max: PASSWORD_COLUMN_MAX_LENGTH })
     .withMessage(
-      `Password must be less than ${PASSWORD_COLUMN_MAX_LENGTH + 1} characters.`,
+      `Password must not exceed ${PASSWORD_COLUMN_MAX_LENGTH} characters.`,
     )
     .isStrongPassword({
       minLength: PASSWORD_MIN_LENGTH,
@@ -50,7 +50,7 @@ export const check_signup = [
     .withMessage(`First name ${empty_error}`)
     .isLength({ max: FIRST_NAME_COLUMN_MAX_LENGTH })
     .withMessage(
-      `First name must be less than ${FIRST_NAME_COLUMN_MAX_LENGTH + 1} characters.`,
+      `First name must not exceed ${FIRST_NAME_COLUMN_MAX_LENGTH} characters.`,
     ),
   body("last_name")
     .trim()
@@ -58,7 +58,7 @@ export const check_signup = [
     .withMessage(`Last name ${empty_error}`)
     .isLength({ max: LAST_NAME_COLUMN_MAX_LENGTH })
     .withMessage(
-      `Last name must be less than ${LAST_NAME_COLUMN_MAX_LENGTH + 1} characters.`,
+      `Last name must be not exceed ${LAST_NAME_COLUMN_MAX_LENGTH} characters.`,
     ),
   get_username_field_chain(),
   get_password_field_chain(),
