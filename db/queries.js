@@ -1,4 +1,4 @@
-import pool from "./pool.js";
+import { pool } from "./pool.js";
 
 export const insert_user = async (user) => {
   const query_text = `
