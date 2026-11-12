@@ -1,4 +1,6 @@
 import express from "express";
+import session from "express-session";
+import passport from "passport";
 import {
   bad_request_handler,
   correct_values_for,
@@ -17,6 +19,8 @@ const app = express();
 
 app.set("view engine", "ejs");
 
+app.use(session({ secret: "a", resave: false, saveUninitialized: true }));
+app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => res.render("home"));
