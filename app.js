@@ -1,5 +1,6 @@
 import express from "express";
 import session from "express-session";
+import { matchedData } from "express-validator";
 import passport from "passport";
 import {
   bad_request_handler,
@@ -14,6 +15,7 @@ import {
   check_new_post,
   check_signup,
 } from "./controllers/validate_controller.js";
+import * as db from "./db/queries.js";
 
 const app = express();
 
@@ -29,7 +31,26 @@ app
   .get((req, res) => {
     res.render("signup");
   })
-  .post(check_signup, correct_values_for("signup"), (req, res) => {
+  .post(check_signup, correct_values_for("signup"), async (req, res, next) => {
+    try {
+      await db.insert_user(matchedData(req));
+    } catch (error) {
+      if (
+        error.message !==
+        'duplicate key value violates unique constraint "users_pkey"'
+      )
+        return next(error);
+      const errors = [{ msg: "Email already in use.", path: "username" }];
+      res.locals.errors = {
+        errors,
+        array: () => errors,
+        mapped: () => ({ username: null }),
+      };
+      res.locals.values = matchedData(req, { onlyValidData: false });
+
+      return res.render("signup");
+    }
+
     res.send("post signup");
   });
 app
