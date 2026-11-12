@@ -56,3 +56,12 @@ export const select_all_posts = () => {
   const { rows } = pool.query(query_text, [username]);
   return rows;
 };
+
+export const delete_post = (post) => {
+  const query_text = `
+  DELETE FROM posts
+  WHERE post_id = $1`;
+  const { post_id } = post;
+  const { rows } = pool.query(query_text, [post_id]);
+  return rows;
+};
