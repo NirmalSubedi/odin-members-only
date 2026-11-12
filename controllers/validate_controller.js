@@ -11,13 +11,13 @@ import {
   PASSWORD_MIN_UPPER_CASE,
 } from "../config.js";
 
-const emptyError = "must be filled.";
+const empty_error = "must be filled.";
 
 const get_username_field_chain = () =>
   body("username")
     .trim()
     .notEmpty()
-    .withMessage(`Email ${emptyError}`)
+    .withMessage(`Email ${empty_error}`)
     .isEmail()
     .withMessage(
       "Email must be formatted correctly (e.g., johndoe@example.com).",
@@ -27,7 +27,7 @@ const get_password_field_chain = () =>
   body("password")
     .trim()
     .notEmpty()
-    .withMessage(`Password ${emptyError}`)
+    .withMessage(`Password ${empty_error}`)
     .isLength({ max: PASSWORD_COLUMN_MAX_LENGTH })
     .withMessage(
       `Password must be less than ${PASSWORD_COLUMN_MAX_LENGTH + 1} characters.`,
@@ -47,7 +47,7 @@ export const check_signup = [
   body("first_name")
     .trim()
     .notEmpty()
-    .withMessage(`First name ${emptyError}`)
+    .withMessage(`First name ${empty_error}`)
     .isLength({ max: FIRST_NAME_COLUMN_MAX_LENGTH })
     .withMessage(
       `First name must be less than ${FIRST_NAME_COLUMN_MAX_LENGTH + 1} characters.`,
@@ -55,7 +55,7 @@ export const check_signup = [
   body("last_name")
     .trim()
     .notEmpty()
-    .withMessage(`Last name ${emptyError}`)
+    .withMessage(`Last name ${empty_error}`)
     .isLength({ max: LAST_NAME_COLUMN_MAX_LENGTH })
     .withMessage(
       `Last name must be less than ${LAST_NAME_COLUMN_MAX_LENGTH + 1} characters.`,
@@ -65,7 +65,7 @@ export const check_signup = [
   body("confirm_password")
     .trim()
     .notEmpty()
-    .withMessage(`Confirm password ${emptyError}`)
+    .withMessage(`Confirm password ${empty_error}`)
     .custom((value, { req }) => req.body.password === value)
     .withMessage("Confirm password must match password."),
 ];
@@ -86,6 +86,6 @@ export const check_login = [
 ];
 
 export const check_new_post = [
-  body("title").trim().notEmpty().withMessage(`Post title ${emptyError}`),
-  body("body").trim().notEmpty().withMessage(`Post body ${emptyError}`),
+  body("title").trim().notEmpty().withMessage(`Post title ${empty_error}`),
+  body("body").trim().notEmpty().withMessage(`Post body ${empty_error}`),
 ];
