@@ -26,9 +26,7 @@ CREATE TABLE IF NOT EXISTS posts (
 
 (async () => {
   console.log("Initializing database...");
-  const client = await pool.connect();
-  await client.query(sql);
-  client.release();
+  await pool.query(sql);
   await pool.end();
   console.log("Done initializing database!");
 })();
