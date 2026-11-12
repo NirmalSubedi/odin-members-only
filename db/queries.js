@@ -47,3 +47,12 @@ export const select_user = (user) => {
   const { rows } = pool.query(query_text, [username]);
   return rows;
 };
+
+export const select_all_posts = () => {
+  const query_text = `
+  SELECT *
+  FROM posts`;
+  const { username } = user;
+  const { rows } = pool.query(query_text, [username]);
+  return rows;
+};
