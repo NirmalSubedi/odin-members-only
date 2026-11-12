@@ -27,3 +27,13 @@ export const insert_post = (post) => {
   const { rows } = pool.query(query_text, [username, title, body]);
   return rows;
 };
+
+export const update_user_to_member = (user) => {
+  const query_text = `
+  UPDATE users
+  SET is_member = true
+  WHERE username = $1`;
+  const { username } = user;
+  const { rows } = pool.query(query_text, [username]);
+  return rows;
+};
