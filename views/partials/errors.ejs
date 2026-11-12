@@ -2,7 +2,7 @@
 <div class="errors" tabindex="-1" autofocus="">
   <% const errorsList = errors.array({onlyFirstError:true}) %>
   <% errors.map = errors.mapped() %>
-  <p>(<%= errorsList.length %>) <%= locals?.get_list_name(errorsList) ?? `Field error${errors.length>1?'s':''}:` %></p>
+  <p>(<%= errorsList.length %>) <%= locals?.get_list_name?.(errorsList) ?? `Field error${errors.length>1?'s':''}:` %></p>
   <ul>
     <% errorsList.forEach(error => { %>
     <li id="<%= error.path + '_error' %>"><a href="#<%=error.path%>"><%= error.msg %></a></li>
