@@ -37,3 +37,13 @@ export const update_user_to_member = (user) => {
   const { rows } = pool.query(query_text, [username]);
   return rows;
 };
+
+export const select_user = (user) => {
+  const query_text = `
+  SELECT *
+  FROM users
+  WHERE username = $1`;
+  const { username } = user;
+  const { rows } = pool.query(query_text, [username]);
+  return rows;
+};
