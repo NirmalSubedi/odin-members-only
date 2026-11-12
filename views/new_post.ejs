@@ -8,7 +8,7 @@
   <body>
     <%- include('partials/nav') %>
     <h1>New post</h1>
-    <%- include('partials/errors', {list_name: 'Field errors:'}) %>
+    <%- include('partials/errors') %>
     <form action="/new_post" method="post">
       <p>Fields with (*) are required.</p>
       <%- include('partials/input', {label:'Title', name:'title', placeholder:'Enter post title...', required: true}) %>
