@@ -1,6 +1,6 @@
 import express from "express";
 import session from "express-session";
-import { matchedData, validationResult } from "express-validator";
+import { matchedData } from "express-validator";
 import passport from "passport";
 import {
   bad_request_handler,
