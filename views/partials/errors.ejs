@@ -5,7 +5,11 @@
   <p>(<%= errorsList.length %>) <%= locals?.get_list_name?.(errorsList) ?? `Field error${errors.length>1?'s':''}:` %></p>
   <ul>
     <% errorsList.forEach(error => { %>
-    <li id="<%= error.path + '_error' %>"><a href="#<%=error.path%>"><%= error.msg %></a></li>
+    <li id="<%= error.path + '_error' %>"><a
+        href="#<%=error.path%>"
+        aria-describedby="<%= error.path + '_error_link_desc' %>"
+      ><%= error.msg %></a></li>
+    <span hidden id="<%= error.path + '_error_link_desc' %>">Jump to <%= error.path.split('_') %> field</span>
     <% }) %>  
   </ul>
 </div>
