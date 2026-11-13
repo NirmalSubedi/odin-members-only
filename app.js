@@ -3,6 +3,7 @@ import express from "express";
 import session from "express-session";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
+import { SALT_LENGTH } from "./config.js";
 import {
   bad_request_handler,
   correct_values_for,
