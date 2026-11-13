@@ -26,3 +26,6 @@ export const PASSWORD_MIN_NUMBERS = 1;
 export const PASSWORD_MIN_SYMBOLS = 1;
 export const TITLE_MAX_LENGTH = 200;
 export const BODY_MAX_LENGTH = 5e3;
+
+// Server values
+export const SALT_LENGTH = 10;

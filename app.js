@@ -68,7 +68,7 @@ app
   })
   .post(check_signup, correct_values_for("signup"), async (req, res, next) => {
     try {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+      const hashedPassword = await bcrypt.hash(req.body.password, SALT_LENGTH);
       req.body.password = hashedPassword;
       await db.insert_user(req.body);
       res.redirect("/");
