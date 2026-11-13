@@ -2,6 +2,7 @@ import express from "express";
 import session from "express-session";
 import { matchedData } from "express-validator";
 import passport from "passport";
+import { Strategy as LocalStrategy } from "passport-local";
 import {
   bad_request_handler,
   correct_values_for,
@@ -24,6 +25,21 @@ app.set("view engine", "ejs");
 app.use(session({ secret: "a", resave: false, saveUninitialized: true }));
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
+
+passport.use(
+  new LocalStrategy(async (username, password, done) => {
+    try {
+      const [user] = db.select_user({ username });
+      if (!user) return done(null, false, { message: "Incorrect username." });
+
+      if (password !== user.password)
+        return done(null, false, { message: "Incorrect password." });
+      return done(null, user);
+    } catch (error) {
+      done(error);
+    }
+  }),
+);
 
 app.get("/", (req, res) => res.render("home"));
 app
