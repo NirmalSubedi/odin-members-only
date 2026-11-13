@@ -90,7 +90,6 @@ app
       res.send("post login");
     },
   );
-
 app.route("/logout").get((req, res, next) => {
   req.logout((error) => {
     if (error) return next(error);
