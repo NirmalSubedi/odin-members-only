@@ -1,5 +1,6 @@
 import express from "express";
 import session from "express-session";
+import { validationResult } from "express-validator";
 import passport from "passport";
 import {
   bad_request_handler,
@@ -14,6 +15,7 @@ import {
   check_new_post,
   check_signup,
 } from "./controllers/validate_controller.js";
+import * as db from "./db/queries.js";
 
 const app = express();
 
@@ -29,8 +31,13 @@ app
   .get((req, res) => {
     res.render("signup");
   })
-  .post(check_signup, correct_values_for("signup"), (req, res) => {
-    res.send("post signup");
+  .post(check_signup, correct_values_for("signup"), async (req, res, next) => {
+    try {
+      await db.insert_user(validationResult(req));
+      res.redirect("/");
+    } catch (error) {
+      next(error);
+    }
   });
 app
   .route("/login")
