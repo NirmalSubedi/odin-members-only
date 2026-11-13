@@ -1,6 +1,6 @@
 import express from "express";
 import session from "express-session";
-import { validationResult } from "express-validator";
+import { matchedData, validationResult } from "express-validator";
 import passport from "passport";
 import {
   bad_request_handler,
@@ -33,7 +33,7 @@ app
   })
   .post(check_signup, correct_values_for("signup"), async (req, res, next) => {
     try {
-      await db.insert_user(validationResult(req));
+      await db.insert_user(matchedData(req));
       res.redirect("/");
     } catch (error) {
       next(error);
