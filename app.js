@@ -1,7 +1,6 @@
 import bcrypt from "bcryptjs";
 import express from "express";
 import session from "express-session";
-import { matchedData } from "express-validator";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import {
