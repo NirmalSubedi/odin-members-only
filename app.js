@@ -42,6 +42,20 @@ passport.use(
   }),
 );
 
+passport.serializeUser((user, done) => {
+  done(null, user.username);
+});
+
+passport.deserializeUser(async (username, done) => {
+  try {
+    const [user] = await db.select_user({ username });
+
+    done(null, user);
+  } catch (error) {
+    done(error);
+  }
+});
+
 app.get("/", (req, res) => res.render("home"));
 app
   .route("/signup")
