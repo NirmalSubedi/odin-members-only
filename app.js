@@ -29,11 +29,12 @@ app.use(express.urlencoded({ extended: true }));
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
-      const [user] = db.select_user({ username });
+      const [user] = await db.select_user({ username });
       if (!user) return done(null, false, { message: "Incorrect username." });
 
       if (password !== user.password)
         return done(null, false, { message: "Incorrect password." });
+
       return done(null, user);
     } catch (error) {
       done(error);
