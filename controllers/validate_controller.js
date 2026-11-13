@@ -4,7 +4,7 @@ import {
   CLUB_SECRET,
   FIRST_NAME_COLUMN_MAX_LENGTH,
   LAST_NAME_COLUMN_MAX_LENGTH,
-  PASSWORD_COLUMN_MAX_LENGTH,
+  PASSWORD_MAX_LENGTH,
   PASSWORD_MIN_LENGTH,
   PASSWORD_MIN_LOWER_CASE,
   PASSWORD_MIN_NUMBERS,
@@ -35,10 +35,8 @@ const get_password_field_chain = () =>
     .trim()
     .notEmpty()
     .withMessage(`Password ${empty_error}`)
-    .isLength({ max: PASSWORD_COLUMN_MAX_LENGTH })
-    .withMessage(
-      `Password must not exceed ${PASSWORD_COLUMN_MAX_LENGTH} characters.`,
-    )
+    .isLength({ max: PASSWORD_MAX_LENGTH })
+    .withMessage(`Password must not exceed ${PASSWORD_MAX_LENGTH} characters.`)
     .isStrongPassword({
       minLength: PASSWORD_MIN_LENGTH,
       minLowerCase: PASSWORD_MIN_LOWER_CASE,
