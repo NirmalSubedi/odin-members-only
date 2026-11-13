@@ -56,7 +56,10 @@ passport.deserializeUser(async (username, done) => {
   }
 });
 
-app.get("/", (req, res) => res.render("home"));
+app.get("/", (req, res) => {
+  res.locals.user = req.user;
+  res.render("home");
+});
 app
   .route("/signup")
   .get((req, res) => {
@@ -75,9 +78,18 @@ app
   .get((req, res) => {
     res.render("login");
   })
-  .post(check_login, correct_values_for("login"), (req, res) => {
-    res.send("post login");
-  });
+  .post(
+    check_login,
+    correct_values_for("login"),
+    passport.authenticate("local", {
+      successRedirect: "/",
+      failureRedirect: "/login",
+      failureMessage: true,
+    }),
+    (req, res) => {
+      res.send("post login");
+    },
+  );
 app
   .route("/join_club")
   .get((req, res) => res.render("join_club"))

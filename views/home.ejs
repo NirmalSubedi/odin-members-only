@@ -7,6 +7,7 @@
   </head>
   <body>
     <%- include('partials/nav') %>
-    <h1>Welcome to the homepage!</h1>
+    <h1>Welcome to the homepage<%= locals.user?' ' + user.username: '' %>!</h1>
+    <% if (locals.user) { %><a href="/logout">Log out</a><% } %>
   </body>
 </html>
