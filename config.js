@@ -11,11 +11,12 @@ export const INTERNAL_SERVER_ERROR = 500;
 // DB values
 export const FIRST_NAME_COLUMN_MAX_LENGTH = 50; // See link for reason: https://stackoverflow.com/questions/20958/list-of-standard-lengths-for-database-fields
 export const LAST_NAME_COLUMN_MAX_LENGTH = 50; // See above link for reason: ^
-export const PASSWORD_COLUMN_MAX_LENGTH = 50; // See link for reason: https://security.stackexchange.com/questions/39849/does-bcrypt-have-a-maximum-password-length
+export const PASSWORD_COLUMN_MAX_LENGTH = 60; // See link for reason: https://en.wikipedia.org/wiki/Bcrypt#Description
 export const USERNAME_COLUMN_MAX_LENGTH = 254; // See link for reason: https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
 
 // Form constraints
 export const PASSWORD_MIN_LENGTH = 8;
+export const PASSWORD_MAX_LENGTH = 18; // = (72 bytes/4 bytes) - bcrypt truncates input past 72 bytes and utf-8 most bytes for a single character is likely to be 4 as stated in this discussion: https://stackoverflow.com/questions/9533258/what-is-the-maximum-number-of-bytes-for-a-utf-8-encoded-character
 export const PASSWORD_MIN_LOWER_CASE = 1;
 export const PASSWORD_MIN_UPPER_CASE = 1;
 export const PASSWORD_MIN_NUMBERS = 1;
