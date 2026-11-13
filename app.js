@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 import express from "express";
 import session from "express-session";
 import { matchedData } from "express-validator";
@@ -67,7 +68,9 @@ app
   })
   .post(check_signup, correct_values_for("signup"), async (req, res, next) => {
     try {
-      await db.insert_user(matchedData(req));
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+      req.body.password = hashedPassword;
+      await db.insert_user(req.body);
       res.redirect("/");
     } catch (error) {
       next(error);
