@@ -90,6 +90,13 @@ app
       res.send("post login");
     },
   );
+
+app.route("/logout").get((req, res, next) => {
+  req.logout((error) => {
+    if (error) return next(error);
+    res.redirect("/");
+  });
+});
 app
   .route("/join_club")
   .get((req, res) => res.render("join_club"))
