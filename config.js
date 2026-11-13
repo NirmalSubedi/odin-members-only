@@ -11,7 +11,7 @@ export const INTERNAL_SERVER_ERROR = 500;
 // DB values
 export const FIRST_NAME_COLUMN_MAX_LENGTH = 50; // See link for reason: https://stackoverflow.com/questions/20958/list-of-standard-lengths-for-database-fields
 export const LAST_NAME_COLUMN_MAX_LENGTH = 50; // See above link for reason: ^
-export const PASSWORD_COLUMN_MAX_LENGTH = 60; // See link for reason: https://en.wikipedia.org/wiki/Bcrypt#Description
+export const PASSWORD_COLUMN_MAX_LENGTH = 255;
 export const USERNAME_COLUMN_MAX_LENGTH = 254; // See link for reason: https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
 
 // Form constraints
