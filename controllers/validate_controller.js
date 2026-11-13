@@ -2,8 +2,8 @@ import { body } from "express-validator";
 import {
   BODY_MAX_LENGTH,
   CLUB_SECRET,
-  FIRST_NAME_COLUMN_MAX_LENGTH,
-  LAST_NAME_COLUMN_MAX_LENGTH,
+  FIRST_NAME_MAX_LENGTH,
+  LAST_NAME_MAX_LENGTH,
   PASSWORD_MAX_LENGTH,
   PASSWORD_MIN_LENGTH,
   PASSWORD_MIN_LOWER_CASE,
@@ -11,7 +11,7 @@ import {
   PASSWORD_MIN_SYMBOLS,
   PASSWORD_MIN_UPPER_CASE,
   TITLE_MAX_LENGTH,
-  USERNAME_COLUMN_MAX_LENGTH,
+  USERNAME_MAX_LENGTH,
 } from "../config.js";
 
 const empty_error = "must be filled.";
@@ -21,10 +21,8 @@ const get_username_field_chain = () =>
     .trim()
     .notEmpty()
     .withMessage(`Email ${empty_error}`)
-    .isLength({ max: USERNAME_COLUMN_MAX_LENGTH })
-    .withMessage(
-      `Email must not exceed ${USERNAME_COLUMN_MAX_LENGTH} characters.`,
-    )
+    .isLength({ max: USERNAME_MAX_LENGTH })
+    .withMessage(`Email must not exceed ${USERNAME_MAX_LENGTH} characters.`)
     .isEmail()
     .withMessage(
       "Email must be formatted correctly (e.g., johndoe@example.com).",
@@ -53,17 +51,17 @@ export const check_signup = [
     .trim()
     .notEmpty()
     .withMessage(`First name ${empty_error}`)
-    .isLength({ max: FIRST_NAME_COLUMN_MAX_LENGTH })
+    .isLength({ max: FIRST_NAME_MAX_LENGTH })
     .withMessage(
-      `First name must not exceed ${FIRST_NAME_COLUMN_MAX_LENGTH} characters.`,
+      `First name must not exceed ${FIRST_NAME_MAX_LENGTH} characters.`,
     ),
   body("last_name")
     .trim()
     .notEmpty()
     .withMessage(`Last name ${empty_error}`)
-    .isLength({ max: LAST_NAME_COLUMN_MAX_LENGTH })
+    .isLength({ max: LAST_NAME_MAX_LENGTH })
     .withMessage(
-      `Last name must be not exceed ${LAST_NAME_COLUMN_MAX_LENGTH} characters.`,
+      `Last name must be not exceed ${LAST_NAME_MAX_LENGTH} characters.`,
     ),
   get_username_field_chain(),
   get_password_field_chain(),
