@@ -9,10 +9,10 @@ export const NOT_FOUND = 404;
 export const INTERNAL_SERVER_ERROR = 500;
 
 // DB values
-export const FIRST_NAME_COLUMN_MAX_LENGTH = 255;
-export const LAST_NAME_COLUMN_MAX_LENGTH = 255;
-export const PASSWORD_COLUMN_MAX_LENGTH = 255;
-export const USERNAME_COLUMN_MAX_LENGTH = 255;
+export const FIRST_NAME_COLUMN_MAX_LENGTH = 256;
+export const LAST_NAME_COLUMN_MAX_LENGTH = 256;
+export const PASSWORD_COLUMN_MAX_LENGTH = 256;
+export const USERNAME_COLUMN_MAX_LENGTH = 256;
 
 // Form constraints
 export const FIRST_NAME_MAX_LENGTH = 50; // See link for reason: https://stackoverflow.com/questions/20958/list-of-standard-lengths-for-database-fields
