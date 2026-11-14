@@ -28,7 +28,11 @@ app.set("view engine", "ejs");
 
 app.use(
   session({
-    store: new pg_session({ pool, tableName: "user_sessions" }),
+    store: new pg_session({
+      pool,
+      tableName: "user_sessions",
+      createTableIfMissing: true,
+    }),
     secret: "a",
     resave: false,
     saveUninitialized: true,
