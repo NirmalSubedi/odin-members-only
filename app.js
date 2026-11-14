@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import pg_session_store from "connect-pg-simple";
+import pg_simple from "connect-pg-simple";
 import express from "express";
 import session from "express-session";
 import passport from "passport";
@@ -22,13 +22,13 @@ import { pool } from "./db/pool.js";
 import * as db from "./db/queries.js";
 
 const app = express();
-const pg_session = pg_session_store(session);
+const session_store = pg_simple(session);
 
 app.set("view engine", "ejs");
 
 app.use(
   session({
-    store: new pg_session({
+    store: new session_store({
       pool,
       tableName: "user_sessions",
       createTableIfMissing: true,
