@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import pg_session_store from "connect-pg-simple";
 import express from "express";
 import session from "express-session";
 import passport from "passport";
@@ -17,13 +18,22 @@ import {
   check_new_post,
   check_signup,
 } from "./controllers/validate_controller.js";
+import { pool } from "./db/pool.js";
 import * as db from "./db/queries.js";
 
 const app = express();
+const pg_session = pg_session_store(session);
 
 app.set("view engine", "ejs");
 
-app.use(session({ secret: "a", resave: false, saveUninitialized: true }));
+app.use(
+  session({
+    store: new pg_session({ pool, tableName: "user_sessions" }),
+    secret: "a",
+    resave: false,
+    saveUninitialized: true,
+  }),
+);
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
 
