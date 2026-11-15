@@ -41,9 +41,12 @@ app.use(
 );
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
 
 app.get("/", (req, res) => {
-  res.locals.user = req.user;
   res.render("home");
 });
 app
