@@ -85,8 +85,8 @@ app
     try {
       const newUser = matchedData(req);
       newUser.password = await bcrypt.hash(req.body.password, SALT_LENGTH);
-      const [user] = await db.insert_user(newUser);
-      req.login(user, (error) => {
+      await db.insert_user(newUser);
+      req.login(newUser, (error) => {
         if (error) return next(error);
         res.redirect("/");
       });

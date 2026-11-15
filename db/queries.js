@@ -4,8 +4,7 @@ export const insert_user = async (user) => {
   const query_text = `
     INSERT INTO 
     users(first_name, last_name, username, password) 
-    VALUES($1, $2, $3, $4)
-    RETURNING *`;
+    VALUES($1, $2, $3, $4)`;
   const { first_name, last_name, username, password } = user;
   const { rows } = await pool.query(query_text, [
     first_name,
