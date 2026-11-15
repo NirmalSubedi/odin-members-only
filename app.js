@@ -83,9 +83,8 @@ app
   })
   .post(check_signup, correct_values_for("signup"), async (req, res, next) => {
     try {
-      const hashedPassword = await bcrypt.hash(req.body.password, SALT_LENGTH);
-      req.body.password = hashedPassword;
       const newUser = matchedData(req);
+      newUser.password = await bcrypt.hash(req.body.password, SALT_LENGTH);
       const [user] = await db.insert_user(newUser);
       req.login(user, (error) => {
         if (error) return next(error);
