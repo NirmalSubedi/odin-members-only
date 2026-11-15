@@ -4,8 +4,8 @@ import express from "express";
 import session from "express-session";
 import { matchedData } from "express-validator";
 import passport from "passport";
-import { Strategy as LocalStrategy } from "passport-local";
 import { SALT_LENGTH } from "./config.js";
+import "./controllers/auth_controller.js";
 import {
   bad_request_handler,
   correct_values_for,
@@ -41,36 +41,6 @@ app.use(
 );
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
-
-passport.use(
-  new LocalStrategy(async (username, password, done) => {
-    try {
-      const [user] = await db.select_user({ username });
-      if (!user) return done(null, false, { message: "Incorrect username." });
-
-      const match = await bcrypt.compare(password, user.password);
-      if (!match) return done(null, false, { message: "Incorrect password." });
-
-      return done(null, user);
-    } catch (error) {
-      done(error);
-    }
-  }),
-);
-
-passport.serializeUser((user, done) => {
-  done(null, user.username);
-});
-
-passport.deserializeUser(async (username, done) => {
-  try {
-    const [user] = await db.select_user({ username });
-
-    done(null, user);
-  } catch (error) {
-    done(error);
-  }
-});
 
 app.get("/", (req, res) => {
   res.locals.user = req.user;
