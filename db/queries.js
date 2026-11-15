@@ -50,6 +50,7 @@ export const select_all_posts = async () => {
   const query_text = `
   SELECT *
   FROM posts
+  JOIN users ON posts.username = users.username
   ORDER BY created_at DESC`;
   const { rows } = await pool.query(query_text);
   return rows;
