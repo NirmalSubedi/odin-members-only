@@ -50,8 +50,7 @@ export const select_all_posts = async () => {
   const query_text = `
   SELECT *
   FROM posts`;
-  const { username } = user;
-  const { rows } = await pool.query(query_text, [username]);
+  const { rows } = await pool.query(query_text);
   return rows;
 };
 
