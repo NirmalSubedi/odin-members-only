@@ -101,8 +101,13 @@ app
   .get((req, res) => {
     res.render("new_post");
   })
-  .post(check_new_post, correct_values_for("new_post"), (req, res) => {
-    res.send("post new post");
+  .post(check_new_post, correct_values_for("new_post"), async (req, res) => {
+    const new_post = {
+      username: req.user.username,
+      ...matchedData(req),
+    };
+    await db.insert_post(new_post);
+    res.redirect("/");
   });
 
 app.use(missing_resource_response);
