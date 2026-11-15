@@ -5,7 +5,7 @@ import session from "express-session";
 import { matchedData } from "express-validator";
 import passport from "passport";
 import { SALT_LENGTH } from "./config.js";
-import "./controllers/auth_controller.js";
+import { authenticate_user } from "./controllers/auth_controller.js";
 import {
   bad_request_handler,
   correct_values_for,
@@ -75,11 +75,7 @@ app
   .post(
     check_login,
     correct_values_for("login"),
-    passport.authenticate("local", {
-      successRedirect: "/",
-      failureRedirect: "/login",
-      failureMessage: true,
-    }),
+    authenticate_user,
     (req, res) => {
       res.send("post login");
     },
