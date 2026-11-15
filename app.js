@@ -97,6 +97,7 @@ app
   .get((req, res) => res.render("join_club"))
   .post(check_join_club, correct_values_for("join_club"), async (req, res) => {
     await db.update_user_to_member(req.user);
+    req.user.is_member = true;
     req.session.is_new_member = true;
     res.redirect("/");
   });

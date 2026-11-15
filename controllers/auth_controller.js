@@ -21,17 +21,11 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  done(null, user.username);
+  done(null, user);
 });
 
-passport.deserializeUser(async (username, done) => {
-  try {
-    const [user] = await db.select_user({ username });
-
-    done(null, user);
-  } catch (error) {
-    done(error);
-  }
+passport.deserializeUser(async (user, done) => {
+  done(null, user);
 });
 
 export const authenticate_user = passport.authenticate("local", {
