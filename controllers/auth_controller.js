@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
+import { UNAUTHORIZED } from "../config.js";
 import * as db from "../db/queries.js";
 
 passport.use(
@@ -32,3 +33,27 @@ passport.deserializeUser(async (username, done) => {
     done(error);
   }
 });
+
+export const isAuth = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.sendStatus(UNAUTHORIZED);
+  }
+};
+
+export const isMember = (req, res, next) => {
+  if (req.isAuthenticated() && req.user.is_member) {
+    next();
+  } else {
+    res.sendStatus(FORBIDDEN);
+  }
+};
+
+export const isAdmin = (req, res, next) => {
+  if (req.isAuthenticated() && req.user.is_admin) {
+    next();
+  } else {
+    res.sendStatus(FORBIDDEN);
+  }
+};
