@@ -89,8 +89,10 @@ app.route("/logout").get((req, res, next) => {
 app
   .route("/join_club")
   .get((req, res) => res.render("join_club"))
-  .post(check_join_club, correct_values_for("join_club"), (req, res) => {
-    res.send("post_join_club");
+  .post(check_join_club, correct_values_for("join_club"), async (req, res) => {
+    await db.update_user_to_member(req.user);
+    req.session.is_new_member = true;
+    res.redirect("/");
   });
 app
   .route("/new_post")
