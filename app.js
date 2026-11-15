@@ -47,11 +47,8 @@ app.use((req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-  if (req.user?.is_new_member) {
-    res.locals.is_new_member = true;
-    delete req.user.is_new_member;
-  }
   res.render("home");
+  if (req.user?.is_new_member) delete req.user.is_new_member;
 });
 app
   .route("/signup")
