@@ -3,11 +3,11 @@
   <input
     type="<%= locals.type || 'text' %>"
     name="<%= locals.name %>"
-    placeholder="<%= locals.placeholder || '' %>"
     id="<%= locals.name %>"
     aria-describedby="<%= locals.name %>_error"
-    <%if(locals.values?.[locals.name]){%>value='<%= values[locals.name] %>'<% } %>
-    <%if(locals.required){%>required<% } %>
-    <%if(locals?.errors?.map?.[locals.name]) {%>aria-invalid="true"<% } %>
+    <%if(locals.placeholder){ %>placeholder<% } %>
+    <%if(locals.values?.[locals.name]){ %>value='<%= values[locals.name] %>'<% } %>
+    <%if(locals.required){ %>required<% } %>
+    <%if(locals?.errors?.map?.[locals.name]){ %>aria-invalid="true"<% } %>
   >
 </div>
