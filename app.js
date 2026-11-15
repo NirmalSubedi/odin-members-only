@@ -47,9 +47,9 @@ app.use((req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-  if (req.session?.is_new_member) {
+  if (req.user?.is_new_member) {
     res.locals.is_new_member = true;
-    delete req.session.is_new_member;
+    delete req.user.is_new_member;
   }
   res.render("home");
 });
@@ -96,7 +96,7 @@ app
   .post(check_join_club, correct_values_for("join_club"), async (req, res) => {
     await db.update_user_to_member(req.user);
     req.user.is_member = true;
-    req.session.is_new_member = true;
+    req.user.is_new_member = true;
     res.redirect("/");
   });
 app
