@@ -48,10 +48,8 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res) => {
   if (req.session?.is_new_member) {
-    console.log(req.session.is_new_member);
     res.locals.is_new_member = true;
     delete req.session.is_new_member;
-    console.log(req.session.is_new_member);
   }
   res.render("home");
 });
