@@ -49,7 +49,8 @@ export const select_user = async (user) => {
 export const select_all_posts = async () => {
   const query_text = `
   SELECT *
-  FROM posts`;
+  FROM posts
+  ORDER BY created_at DESC`;
   const { rows } = await pool.query(query_text);
   return rows;
 };
