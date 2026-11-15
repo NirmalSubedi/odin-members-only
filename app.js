@@ -46,7 +46,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
+  const posts = await db.select_all_posts();
+  res.locals.posts = posts;
   res.render("home");
   if (req.user?.is_new_member) delete req.user.is_new_member;
 });

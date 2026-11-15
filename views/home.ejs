@@ -8,5 +8,13 @@
   <body>
     <%- include('partials/nav') %>
     <h1>Welcome to the <%=locals.user?.is_new_member?'club ':'homepage'%><%= locals.user?` ${user.username} (${user.first_name} ${user.last_name})`: '' %>!</h1>
+    <% locals.posts?.forEach(post => { %>
+    <article class="post">
+      <h2><%= post.title %></h2>
+      <p><%= post.body %></p>
+      <address>Authored by: <a href="mailto:<%= post.username %>"><%= post.username %></a>.</address>
+      <p>Posted at <time datetime="<%= post.created_at.toISOString() %>"><%= post.created_at.toUTCString() %></time>.</p>
+    </article>
+    <% }) %>
   </body>
 </html>
