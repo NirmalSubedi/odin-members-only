@@ -4,7 +4,8 @@ export const insert_user = async (user) => {
   const query_text = `
     INSERT INTO 
     users(first_name, last_name, username, password, is_member, is_admin) 
-    VALUES($1, $2, $3, $4, $5, $6)`;
+    VALUES($1, $2, $3, $4, $5, $6)
+    RETURNING *`;
   const {
     first_name,
     last_name,

@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import pg_simple from "connect-pg-simple";
 import express from "express";
 import session from "express-session";
+import { matchedData } from "express-validator";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { SALT_LENGTH } from "./config.js";
@@ -84,8 +85,11 @@ app
     try {
       const hashedPassword = await bcrypt.hash(req.body.password, SALT_LENGTH);
       req.body.password = hashedPassword;
-      await db.insert_user(req.body);
-      res.redirect("/");
+      const [user] = await db.insert_user(req.body);
+      req.login(user, (error) => {
+        if (error) return next(error);
+        res.redirect("/");
+      });
     } catch (error) {
       next(error);
     }
