@@ -22,7 +22,7 @@
         <address>Authored by: <%= post.first_name %> <%= post.last_name %> (<a href="mailto:<%= post.username %>"><%= post.username %></a>)</address>
         <p>Posted at <time datetime="<%= post.created_at.toISOString() %>"><%= post.created_at.toUTCString() %></time>.</p>
         <% } else if (locals.user) { %>
-        <p><a href="./join_club">Join the club</a> to become a member and to see the author's name and time of post.</p>
+        <p><a href="./join_club">Join the club</a> to become a member and to see the author's name and time of this post.</p>
         <% } %>
       </article>
       <% }) %>
