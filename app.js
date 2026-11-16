@@ -87,17 +87,12 @@ app
       res.send("post login");
     },
   );
-app
-  .route("/logout")
-  .get(
-    check_auth({ on_fail: (req, res) => res.redirect("/") }),
-    (req, res, next) => {
-      req.logout((error) => {
-        if (error) return next(error);
-        res.redirect("/");
-      });
-    },
-  );
+app.route("/logout").get((req, res, next) => {
+  req.logout((error) => {
+    if (error) return next(error);
+    res.redirect("/");
+  });
+});
 app
   .route("/join_club")
   .get(check_auth({ on_fail: (req, res) => res.redirect("/") }), (req, res) =>
