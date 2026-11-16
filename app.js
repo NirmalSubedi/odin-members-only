@@ -5,7 +5,11 @@ import session from "express-session";
 import { body, matchedData } from "express-validator";
 import passport from "passport";
 import { SALT_LENGTH } from "./config.js";
-import { authenticate_user, is_admin } from "./controllers/auth_controller.js";
+import {
+  authenticate_user,
+  check_auth,
+  is_admin,
+} from "./controllers/auth_controller.js";
 import {
   bad_request_handler,
   correct_values_for,
@@ -100,17 +104,22 @@ app
   });
 app
   .route("/new_post")
-  .get((req, res) => {
+  .get(check_auth({ on_fail: (req, res) => res.redirect("/") }), (req, res) => {
     res.render("new_post");
   })
-  .post(check_new_post, correct_values_for("new_post"), async (req, res) => {
-    const new_post = {
-      username: req.user.username,
-      ...matchedData(req),
-    };
-    await db.insert_post(new_post);
-    res.redirect("/");
-  });
+  .post(
+    check_auth(),
+    check_new_post,
+    correct_values_for("new_post"),
+    async (req, res) => {
+      const new_post = {
+        username: req.user.username,
+        ...matchedData(req),
+      };
+      await db.insert_post(new_post);
+      res.redirect("/");
+    },
+  );
 
 app.post("/delete_post", is_admin, body("post_id"), async (req, res) => {
   await db.delete_post(matchedData(req));
