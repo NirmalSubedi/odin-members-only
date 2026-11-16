@@ -14,10 +14,10 @@
       <p>Congratulation on joining the club. Get acquainted with your fellow club members by reading their posts or by creating your own posts to share.</p>
       <% } %>
 
-      <% if (!locals.user) { %>
-      <p><a href="./login">Log in</a> to create a new post if you already have an account. Otherwise, feel free to <a href="./signup">sign up</a> for an account.</p>
-      <% } else { %>
+      <% if (locals.user) { %>
       <p>Have something in mind that you would like to share? Then, feel free to <a href="./new_post">create a new post.</a></p>
+      <% } else { %>
+      <p><a href="./login">Log in</a> to create a new post if you already have an account. Otherwise, feel free to <a href="./signup">sign up</a> for an account.</p>
       <% } %>
 
       <% if (locals.posts) { %>
