@@ -9,7 +9,8 @@ export const correct_values_for =
       validationResult(req).throw();
       next();
     } catch (error) {
-      const result = callback(req, res);
+      let result;
+      if (callback) result = callback(req, res);
       if (result instanceof Promise) await result;
       next(new BadRequestError("Client validation error(s).", page));
     }
