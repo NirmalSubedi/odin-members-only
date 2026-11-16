@@ -10,7 +10,7 @@
     <% if (locals.user && !locals.user.is_member) { %>
     <li><a href="./join_club">Join club</a></li>
     <% } %>
-    <% if (locals.user && locals.user.is_member) { %>
+    <% if (locals.user) { %>
     <li><a href="./new_post">New post</a></li>
     <% } %>
   </ul>
