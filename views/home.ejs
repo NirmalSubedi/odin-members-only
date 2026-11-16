@@ -9,14 +9,19 @@
     <%- include('partials/nav') %>
     <main>
       <h1>Welcome to the <%=locals.user?.is_new_member?'club ':'homepage'%><%= locals.user?` ${user.username} (${user.first_name} ${user.last_name})`: '' %>!</h1>
+      <p><a href="./login">Login</a> to create a new post if you already have an account. Otherwise, <a href="./signup">Signup</a> for an account.</p>
       <% if (locals.posts) { %>
       <h2>(<%= posts.length %>) Post<%=posts.length>1?'s':''%>:</h2>
       <% posts.forEach(post => { %>
       <article class="post">
         <h3><%= post.title %></h3>
         <p><%= post.body %></p>
+        <% if (locals.user?.is_member) { %>
         <address>Authored by: <%= post.first_name %> <%= post.last_name %> (<a href="mailto:<%= post.username %>"><%= post.username %></a>)</address>
         <p>Posted at <time datetime="<%= post.created_at.toISOString() %>"><%= post.created_at.toUTCString() %></time>.</p>
+        <% } else if (locals.user) { %>
+        <p><a href="./join_club">Join the club</a> to become a member and to see the author's name and time of post.</p>
+        <% } %>
       </article>
       <% }) %>
       <% } else { %>
