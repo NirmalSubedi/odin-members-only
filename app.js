@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import pg_simple from "connect-pg-simple";
 import express from "express";
 import session from "express-session";
-import { body, matchedData } from "express-validator";
+import { matchedData } from "express-validator";
 import passport from "passport";
 import { SALT_LENGTH } from "./config.js";
 import { authenticate_user } from "./controllers/auth_controller.js";
@@ -14,6 +14,7 @@ import {
   server_error_handler,
 } from "./controllers/error_controller.js";
 import {
+  check_delete_post,
   check_join_club,
   check_login,
   check_new_post,
@@ -112,7 +113,7 @@ app
     res.redirect("/");
   });
 
-app.post("/delete_post", body("post_id"), async (req, res) => {
+app.post("/delete_post", check_delete_post, async (req, res) => {
   await db.delete_post(matchedData(req));
   res.redirect("/");
 });
