@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import { UNAUTHORIZED } from "../config.js";
+import { FORBIDDEN, UNAUTHORIZED } from "../config.js";
 import * as db from "../db/queries.js";
 
 passport.use(

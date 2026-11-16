@@ -2,10 +2,10 @@ import bcrypt from "bcryptjs";
 import pg_simple from "connect-pg-simple";
 import express from "express";
 import session from "express-session";
-import { matchedData } from "express-validator";
+import { body, matchedData } from "express-validator";
 import passport from "passport";
 import { SALT_LENGTH } from "./config.js";
-import { authenticate_user } from "./controllers/auth_controller.js";
+import { authenticate_user, is_admin } from "./controllers/auth_controller.js";
 import {
   bad_request_handler,
   correct_values_for,
@@ -112,7 +112,7 @@ app
     res.redirect("/");
   });
 
-app.post("/delete_post", async (req, res) => {
+app.post("/delete_post", is_admin, body("post_id"), async (req, res) => {
   await db.delete_post(matchedData(req));
   res.redirect("/");
 });
