@@ -20,7 +20,7 @@
       <article class="post">
         <h3><%= post.title %></h3>
         <p><%= post.body %></p>
-        <% if (locals.user?.is_member || locals.user.username === post.username) { %>
+        <% if (locals.user?.is_member || locals.user?.username === post.username) { %>
         <address>Authored by: <%= post.first_name %> <%= post.last_name %> (<a href="mailto:<%= post.username %>"><%= post.username %></a>)</address>
         <p>Posted at <time datetime="<%= post.created_at.toISOString() %>"><%= post.created_at.toUTCString() %></time>.</p>
         <% } else if (locals.user) { %>
