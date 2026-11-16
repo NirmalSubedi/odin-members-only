@@ -112,6 +112,10 @@ app
     res.redirect("/");
   });
 
+app.post("/delete_post", (req, res) => {
+  res.send("delete post");
+});
+
 app.use(missing_resource_response);
 app.use(bad_request_handler);
 app.use(not_found_handler);
