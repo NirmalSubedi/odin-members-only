@@ -10,7 +10,7 @@
     <main>
       <h1>Welcome to the homepage<%= locals.user?` ${user.first_name} ${user.last_name} (${user.username})`: '' %>!</h1>
       <% if (locals.user?.is_new_member) { %>
-      <p>Congratulation on joining the club. Get acquainted with your fellow club members by reading their posts and sharing your thoughts via your own posts.</p>
+      <p>Congratulation on joining the club. Get acquainted with your fellow club members by reading their posts or by creating your own posts.</p>
       <% } %>
       <% if (!locals.user) { %>
       <p><a href="./login">Log in</a> to create a new post if you already have an account. Otherwise, feel free to <a href="./signup">sign up</a> for an account.</p>
