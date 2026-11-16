@@ -95,8 +95,9 @@ app.route("/logout").get((req, res, next) => {
 });
 app
   .route("/join_club")
-  .get(check_auth({ on_fail: (req, res) => res.redirect("/") }), (req, res) =>
-    res.render("join_club"),
+  .get(
+    check_auth({ on_fail: (req, res) => res.redirect("/login") }),
+    (req, res) => res.render("join_club"),
   )
   .post(
     check_auth(),
@@ -111,9 +112,12 @@ app
   );
 app
   .route("/new_post")
-  .get(check_auth({ on_fail: (req, res) => res.redirect("/") }), (req, res) => {
-    res.render("new_post");
-  })
+  .get(
+    check_auth({ on_fail: (req, res) => res.redirect("/login") }),
+    (req, res) => {
+      res.render("new_post");
+    },
+  )
   .post(
     check_auth(),
     check_new_post,
