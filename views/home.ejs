@@ -9,26 +9,32 @@
     <%- include('partials/nav') %>
     <main>
       <h1>Welcome to the homepage<%= locals.user?` ${user.first_name} ${user.last_name} (${user.username})`: '' %>!</h1>
+
       <% if (locals.user?.is_new_member) { %>
       <p>Congratulation on joining the club. Get acquainted with your fellow club members by reading their posts or by creating your own posts to share.</p>
       <% } %>
+
       <% if (!locals.user) { %>
       <p><a href="./login">Log in</a> to create a new post if you already have an account. Otherwise, feel free to <a href="./signup">sign up</a> for an account.</p>
       <% } else { %>
       <p>Have something in mind that you would like to share? Then, feel free to <a href="./new_post">create a new post.</a></p>
       <% } %>
+
       <% if (locals.posts) { %>
       <h2>(<%= posts.length %>) Post<%=posts.length>1?'s':''%>:</h2>
+
       <% posts.forEach(post => { %>
       <article class="post">
         <h3><%= post.title %></h3>
         <p><%= post.body %></p>
+
         <% if (locals.user?.is_member || locals.user?.username === post.username) { %>
         <address>Authored by: <%= post.first_name %> <%= post.last_name %> (<a href="mailto:<%= post.username %>"><%= post.username %></a>)</address>
         <p>Posted at <time datetime="<%= post.created_at.toISOString() %>"><%= post.created_at.toUTCString() %></time>.</p>
         <% } else if (locals.user) { %>
         <p><a href="./join_club">Join the club</a> to become a member and to see the author's name and time of this post.</p>
         <% } %>
+
         <% if (locals.user?.is_admin) { %>
         <form action="/delete_post" method="post">
           <input type="hidden" value="<%= post.id %>">
