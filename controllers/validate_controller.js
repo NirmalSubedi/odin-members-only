@@ -102,7 +102,3 @@ export const check_new_post = [
     .isLength({ max: BODY_MAX_LENGTH })
     .withMessage(`Post body must not exceed ${BODY_MAX_LENGTH} characters.`),
 ];
-
-export const check_delete_post = [
-  body("post_id").trim().notEmpty().withMessage(`Post id ${empty_error}`),
-];

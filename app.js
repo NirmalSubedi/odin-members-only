@@ -14,7 +14,6 @@ import {
   server_error_handler,
 } from "./controllers/error_controller.js";
 import {
-  check_delete_post,
   check_join_club,
   check_login,
   check_new_post,
@@ -113,7 +112,7 @@ app
     res.redirect("/");
   });
 
-app.post("/delete_post", check_delete_post, async (req, res) => {
+app.post("/delete_post", async (req, res) => {
   await db.delete_post(matchedData(req));
   res.redirect("/");
 });
