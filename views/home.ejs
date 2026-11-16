@@ -11,6 +11,8 @@
       <h1>Welcome to the <%=locals.user?.is_new_member?'club ':'homepage'%><%= locals.user?` ${user.username} (${user.first_name} ${user.last_name})`: '' %>!</h1>
       <% if (!locals.user) { %>
       <p><a href="./login">Login</a> to create a new post if you already have an account. Otherwise, <a href="./signup">Signup</a> for an account.</p>
+      <% } else { %>
+      <p>Have something in mind that you would like sharing? Feel free to <a href="./new_post">create a new post.</a></p>
       <% } %>
       <% if (locals.posts) { %>
       <h2>(<%= posts.length %>) Post<%=posts.length>1?'s':''%>:</h2>
