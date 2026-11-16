@@ -34,7 +34,7 @@ export const authenticate_user = passport.authenticate("local", {
   failureMessage: true,
 });
 
-export const isAuth = (req, res, next) => {
+export const is_auth = (req, res, next) => {
   if (req.isAuthenticated()) {
     next();
   } else {
@@ -42,7 +42,7 @@ export const isAuth = (req, res, next) => {
   }
 };
 
-export const isMember = (req, res, next) => {
+export const is_member = (req, res, next) => {
   if (req.isAuthenticated() && req.user.is_member) {
     next();
   } else {
@@ -50,7 +50,7 @@ export const isMember = (req, res, next) => {
   }
 };
 
-export const isAdmin = (req, res, next) => {
+export const is_admin = (req, res, next) => {
   if (req.isAuthenticated() && req.user.is_admin) {
     next();
   } else {
