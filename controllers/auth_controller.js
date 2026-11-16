@@ -34,11 +34,12 @@ export const authenticate_user = passport.authenticate("local", {
   failureMessage: true,
 });
 
-export const is_auth = (req, res, next) => {
+export const check_auth = (config) => (req, res, next) => {
   if (req.isAuthenticated()) {
     next();
   } else {
-    res.sendStatus(UNAUTHORIZED);
+    if (config?.on_fail) config.on_fail(req, res);
+    else res.sendStatus(UNAUTHORIZED);
   }
 };
 
