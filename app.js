@@ -95,13 +95,20 @@ app.route("/logout").get((req, res, next) => {
 });
 app
   .route("/join_club")
-  .get((req, res) => res.render("join_club"))
-  .post(check_join_club, correct_values_for("join_club"), async (req, res) => {
-    await db.update_user_to_member(req.user);
-    req.user.is_member = true;
-    req.user.is_new_member = true;
-    res.redirect("/");
-  });
+  .get(check_auth({ on_fail: (req, res) => res.redirect("/") }), (req, res) =>
+    res.render("join_club"),
+  )
+  .post(
+    check_auth(),
+    check_join_club,
+    correct_values_for("join_club"),
+    async (req, res) => {
+      await db.update_user_to_member(req.user);
+      req.user.is_member = true;
+      req.user.is_new_member = true;
+      res.redirect("/");
+    },
+  );
 app
   .route("/new_post")
   .get(check_auth({ on_fail: (req, res) => res.redirect("/") }), (req, res) => {
