@@ -47,6 +47,7 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
   res.locals.user = req.user;
+  res.locals.session = req.session;
   next();
 });
 
@@ -78,6 +79,7 @@ app
   .route("/login")
   .get((req, res) => {
     res.render("login");
+    if (req.session?.is_auth_fail) delete req.session.is_auth_fail;
   })
   .post(
     check_login,
@@ -96,7 +98,12 @@ app.route("/logout").get((req, res, next) => {
 app
   .route("/join_club")
   .get(
-    check_auth({ on_fail: (req, res) => res.redirect("/login") }),
+    check_auth({
+      on_fail: (req, res) => {
+        req.session.is_auth_fail = true;
+        res.redirect("/login");
+      },
+    }),
     (req, res) => res.render("join_club"),
   )
   .post(
@@ -113,7 +120,12 @@ app
 app
   .route("/new_post")
   .get(
-    check_auth({ on_fail: (req, res) => res.redirect("/login") }),
+    check_auth({
+      on_fail: (req, res) => {
+        req.session.is_auth_fail = true;
+        res.redirect("/login");
+      },
+    }),
     (req, res) => {
       res.render("new_post");
     },

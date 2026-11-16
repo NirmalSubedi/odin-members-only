@@ -10,6 +10,9 @@
     <h1>Log in</h1>
     <%- include('partials/errors') %>
     <form action="/login" method="post">
+      <% if (locals.session?.is_auth_fail) { %>
+      <p>You first must login to access that resource.</p>
+      <% } %>
       <p>Fields with (*) are required.</p>
       <%- include('partials/input', {label:'Email', name:'username', type:'email', placeholder:'johndoe@example.com', required:true }) %>
       <%- include('partials/input', {label:'Password', name:'password', type:'password',required:true }) %>
