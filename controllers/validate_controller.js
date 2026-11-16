@@ -86,6 +86,7 @@ export const check_join_club = [
 export const check_login = [
   get_username_field_chain(),
   get_password_field_chain(),
+  body("is_admin").optional({ values: "falsy" }),
 ];
 
 export const check_new_post = [
