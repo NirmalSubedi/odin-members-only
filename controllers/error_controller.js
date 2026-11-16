@@ -3,14 +3,11 @@ import { BAD_REQUEST, INTERNAL_SERVER_ERROR, NOT_FOUND } from "../config.js";
 import { BadRequestError } from "../errors/BadRequestError.js";
 import { NotFoundError } from "../errors/NotFoundError.js";
 
-export const correct_values_for = (page, setup) => async (req, res, next) => {
+export const correct_values_for = (page) => (req, res, next) => {
   try {
     validationResult(req).throw();
     next();
   } catch (error) {
-    let result;
-    if (setup) result = setup(req, res);
-    if (result instanceof Promise) await result;
     next(new BadRequestError("Client validation error(s).", page));
   }
 };
