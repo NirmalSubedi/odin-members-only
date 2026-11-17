@@ -6,27 +6,23 @@
     <%- include('partials/title', {title:'Log in'})%>
   </head>
   <%- include('partials/errors_hook') %>
-  <% if(locals.session?.messages) {%>
-    <% page.has_auth_error = true %>
-  <% } %>
   <body>
     <%- include('partials/nav') %>
     <h1>Log in</h1>
-    <%- include('partials/errors') %>
     <% if (locals.session?.is_auth_fail) { %>
-    <p aria-live="assertive">You first must login to access that resource.</p>
+      <p aria-live="assertive">You first must login to access that resource.</p>
     <% } %>
+    <% if(locals.session?.messages?.length>0) {%>
+      <% const [path, err_msg] = locals.session.messages.at(-1).split(': ') %>
+      <%- include('partials/errors_hook', {errors: { mapped: () => ({[path]:err_msg}), array: () => [{path, msg:err_msg}] }}) %>
+    <% } %>
+
+    <%- include('partials/errors') %>
     <form action="/login" method="post">
       <p>Fields with (*) are required.</p>
       <%- include('partials/input', {label:'Email', name:'username', type:'email', placeholder:'johndoe@example.com', required:true, autofocus:!page.hasError }) %>
-      <% if (page.has_auth_error && session.messages.at(-1) === 'Incorrect email.') { %>
-       <span aria-live="polite"><%= session.messages.at(-1) %></span>
-      <% } %>
       <%- include('partials/input', {label:'Password', name:'password', type:'password',required:true }) %>
-      <% if (page.has_auth_error && session.messages.at(-1) === 'Incorrect password.') { %>
-       <span aria-live="polite"><%= session.messages.at(-1) %></span>
-      <% } %>
-      <div><button type="submit">Log in</button></div>
+      <button type="submit">Log in</button>
     </form>
     <p>Don't have an account? <a href="./signup">Sign up</a> for an account.</p>
   </body>
