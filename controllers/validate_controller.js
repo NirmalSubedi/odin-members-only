@@ -72,12 +72,7 @@ export const check_signup = [
     .withMessage(`Confirm password ${empty_error}`)
     .custom((value, { req }) => req.body.password === value)
     .withMessage("Confirm password must match password."),
-  body("admin_secret")
-    .trim()
-    .optional({ values: "falsy" })
-    .toLowerCase()
-    .custom((admin_secret) => admin_secret === ADMIN_SECRET)
-    .withMessage("Nice guess, but nope."),
+  body("admin_secret").trim().optional({ values: "falsy" }).toLowerCase(),
 ];
 
 export const check_join_club = [
