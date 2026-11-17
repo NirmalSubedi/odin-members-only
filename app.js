@@ -67,6 +67,7 @@ app
       const new_user = matchedData(req);
       new_user.password = await bcrypt.hash(new_user.password, SALT_LENGTH);
       new_user.is_admin = new_user.admin_secret === ADMIN_SECRET;
+      new_user.is_member = new_user.is_admin;
       const [user] = await db.insert_user(new_user);
       req.login(user, (error) => {
         if (error) return next(error);

@@ -3,15 +3,23 @@ import { pool } from "./pool.js";
 export const insert_user = async (user) => {
   const query_text = `
     INSERT INTO 
-    users(first_name, last_name, username, password, is_admin) 
-    VALUES($1, $2, $3, $4, $5)
+    users(first_name, last_name, username, password, is_member, is_admin) 
+    VALUES($1, $2, $3, $4, $5, $6)
     RETURNING *`;
-  const { first_name, last_name, username, password, is_admin = false } = user;
+  const {
+    first_name,
+    last_name,
+    username,
+    password,
+    is_member = false,
+    is_admin = false,
+  } = user;
   const { rows } = await pool.query(query_text, [
     first_name,
     last_name,
     username,
     password,
+    is_member,
     is_admin,
   ]);
   return rows;
