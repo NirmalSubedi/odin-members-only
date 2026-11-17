@@ -8,7 +8,6 @@
   <%- include('partials/errors_hook') %>
   <% if(locals.session?.messages) {%>
     <% page.has_auth_error = true %>
-    <% console.log(session) %>
   <% } %>
   <body>
     <%- include('partials/nav') %>
