@@ -76,7 +76,8 @@ export const check_signup = [
     .trim()
     .optional({ values: "falsy" })
     .toLowerCase()
-    .custom((admin_secret) => admin_secret === ADMIN_SECRET),
+    .custom((admin_secret) => admin_secret === ADMIN_SECRET)
+    .withMessage("Nice guess, but nope."),
 ];
 
 export const check_join_club = [
