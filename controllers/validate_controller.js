@@ -1,5 +1,6 @@
 import { body } from "express-validator";
 import {
+  ADMIN_SECRET,
   BODY_MAX_LENGTH,
   CLUB_SECRET,
   FIRST_NAME_MAX_LENGTH,
@@ -71,6 +72,11 @@ export const check_signup = [
     .withMessage(`Confirm password ${empty_error}`)
     .custom((value, { req }) => req.body.password === value)
     .withMessage("Confirm password must match password."),
+  body("admin_secret")
+    .trim()
+    .optional({ values: "falsy" })
+    .toLowerCase()
+    .custom((admin_secret) => admin_secret === ADMIN_SECRET),
 ];
 
 export const check_join_club = [
