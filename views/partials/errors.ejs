@@ -1,9 +1,9 @@
 <% if (page.hasError) { %>
-<% const errorsList = page.errorsList %>
+<% const errors_list = page.errors_list %>
 <div class="errors" tabindex="-1" autofocus="">
-  <p>(<%= errorsList.length %>) <%= locals?.get_list_name?.(errorsList) ?? `Field error${errorsList.length>1?'s':''}:` %></p>
+  <p>(<%= errors_list.length %>) <%= locals?.get_list_name?.(errors_list) ?? `Field error${errors_list.length>1?'s':''}:` %></p>
   <ul>
-    <% errorsList.forEach(error => { %>
+    <% errors_list.forEach(error => { %>
     <li id="<%= error.path + '_error' %>"><a
         href="#<%=error.path%>"
         aria-describedby="<%= error.path + '_error_link_desc' %>"
