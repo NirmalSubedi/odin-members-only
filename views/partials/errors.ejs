@@ -1,7 +1,6 @@
-<% if (locals.errors) { %>
+<% if (page.hasError) { %>
+<% const errorsList = page.errorsList %>
 <div class="errors" tabindex="-1" autofocus="">
-  <% const errorsList = errors.array({onlyFirstError:true}) %>
-  <% errors.map = errors.mapped() %>
   <p>(<%= errorsList.length %>) <%= locals?.get_list_name?.(errorsList) ?? `Field error${errorsList.length>1?'s':''}:` %></p>
   <ul>
     <% errorsList.forEach(error => { %>
