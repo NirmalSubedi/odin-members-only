@@ -83,17 +83,23 @@ app
 app
   .route("/login")
   .get((req, res) => {
+    if (req.session?.locals_values) {
+      res.locals.values = req.session.locals_values;
+      delete req.session.locals_values;
+    }
     res.locals.page.name = "login";
     res.render("login");
     if (req.session?.is_auth_fail) delete req.session.is_auth_fail;
+    if (req.session?.messages) req.session.messages.length = 0;
   })
   .post(
     check_login,
     correct_values_for("login"),
-    authenticate_user,
-    (req, res) => {
-      res.send("post login");
+    (req, res, next) => {
+      req.session.locals_values = matchedData(req, { onlyValidData: false });
+      next();
     },
+    authenticate_user,
   );
 app.route("/logout").get((req, res, next) => {
   req.logout((error) => {

@@ -6,6 +6,10 @@
     <%- include('partials/title', {title:'Log in'})%>
   </head>
   <%- include('partials/errors_hook') %>
+  <% if(locals.session?.messages) {%>
+    <% page.has_auth_error = true %>
+    <% console.log(session) %>
+  <% } %>
   <body>
     <%- include('partials/nav') %>
     <h1>Log in</h1>
@@ -16,8 +20,14 @@
     <form action="/login" method="post">
       <p>Fields with (*) are required.</p>
       <%- include('partials/input', {label:'Email', name:'username', type:'email', placeholder:'johndoe@example.com', required:true, autofocus:!page.hasError }) %>
+      <% if (page.has_auth_error && session.messages.at(-1) === 'Incorrect email.') { %>
+       <span aria-live="polite"><%= session.messages.at(-1) %></span>
+      <% } %>
       <%- include('partials/input', {label:'Password', name:'password', type:'password',required:true }) %>
-      <button type="submit">Log in</button>
+      <% if (page.has_auth_error && session.messages.at(-1) === 'Incorrect password.') { %>
+       <span aria-live="polite"><%= session.messages.at(-1) %></span>
+      <% } %>
+      <div><button type="submit">Log in</button></div>
     </form>
     <p>Don't have an account? <a href="./signup">Sign up</a> for an account.</p>
   </body>
