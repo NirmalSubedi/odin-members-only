@@ -1,4 +1,4 @@
-<% if (page.hasError) { %>
+<% if (page.has_error) { %>
 <% const errors_list = page.errors_list %>
 <div class="errors" tabindex="-1" autofocus="">
   <p>(<%= errors_list.length %>) <%= locals?.get_list_name?.(errors_list) ?? `Field error${errors_list.length>1?'s':''}:` %></p>
