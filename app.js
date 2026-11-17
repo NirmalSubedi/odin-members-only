@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import pg_simple from "connect-pg-simple";
 import express from "express";
 import session from "express-session";
