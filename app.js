@@ -4,7 +4,7 @@ import express from "express";
 import session from "express-session";
 import { body, matchedData } from "express-validator";
 import passport from "passport";
-import { SALT_LENGTH } from "./config.js";
+import { ADMIN_SECRET, SALT_LENGTH } from "./config.js";
 import {
   authenticate_user,
   check_auth,
@@ -66,6 +66,7 @@ app
     try {
       const new_user = matchedData(req);
       new_user.password = await bcrypt.hash(new_user.password, SALT_LENGTH);
+      new_user.is_admin = new_user.admin_secret === ADMIN_SECRET;
       const [user] = await db.insert_user(new_user);
       req.login(user, (error) => {
         if (error) return next(error);
