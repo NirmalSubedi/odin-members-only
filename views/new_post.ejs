@@ -11,7 +11,7 @@
     <%- include('partials/errors') %>
     <form action="/new_post" method="post">
       <p>Fields with (*) are required.</p>
-      <%- include('partials/input', {label:'Title', name:'title', placeholder:'What would like to title your post?', required: true}) %>
+      <%- include('partials/input', {label:'Title', name:'title', placeholder:'What would like to title your post?', required: true, autofocus:!page.hasError}) %>
       <div>
         <label for="body">Body*</label>
         <textarea name="body" id="body" placeholder="What is on your mind?" aria-describedby="body_error" required <%if(locals?.errors?.map?.['body']) {%>aria-invalid="true"<% } %>><%if(locals.values?.['body']){%><%= values['body'] %><% } %></textarea>
