@@ -4,7 +4,7 @@ import express from "express";
 import session from "express-session";
 import { body, matchedData } from "express-validator";
 import passport from "passport";
-import { ADMIN_SECRET, SALT_LENGTH } from "./config.js";
+import { ADMIN_SECRET, SALT_LENGTH, SERVER_PORT } from "./config.js";
 import {
   authenticate_user,
   check_auth,
@@ -170,7 +170,7 @@ app.use(bad_request_handler);
 app.use(not_found_handler);
 app.use(server_error_handler);
 
-app.listen(3000, (error) => {
+app.listen(SERVER_PORT, (error) => {
   if (error) throw error;
-  console.log("App running on port 3000");
+  console.log(`App running on port ${SERVER_PORT}`);
 });
