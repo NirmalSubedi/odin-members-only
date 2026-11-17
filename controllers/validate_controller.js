@@ -1,6 +1,5 @@
 import { body } from "express-validator";
 import {
-  ADMIN_SECRET,
   BODY_MAX_LENGTH,
   CLUB_SECRET,
   FIRST_NAME_MAX_LENGTH,
