@@ -55,12 +55,14 @@ app.use((req, res, next) => {
 app.get("/", async (req, res) => {
   const posts = await db.select_all_posts();
   res.locals.posts = posts;
+  res.locals.page = "home";
   res.render("home");
   if (req.user?.is_new_member) delete req.user.is_new_member;
 });
 app
   .route("/signup")
   .get((req, res) => {
+    res.locals.page = "signup";
     res.render("signup");
   })
   .post(check_signup, correct_values_for("signup"), async (req, res, next) => {
@@ -81,6 +83,7 @@ app
 app
   .route("/login")
   .get((req, res) => {
+    res.locals.page = "login";
     res.render("login");
     if (req.session?.is_auth_fail) delete req.session.is_auth_fail;
   })
@@ -107,7 +110,10 @@ app
         res.redirect("/login");
       },
     }),
-    (req, res) => res.render("join_club"),
+    (req, res) => {
+      res.locals.page = "join_club";
+      res.render("join_club");
+    },
   )
   .post(
     check_auth(),
@@ -130,6 +136,7 @@ app
       },
     }),
     (req, res) => {
+      res.locals.page = "new_post";
       res.render("new_post");
     },
   )
