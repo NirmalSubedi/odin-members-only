@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%- include('partials/title', {title:'Log in'})%>
   </head>
-  <% if (locals.errors) { %>
-  <% locals.page.hasError = true %>
-  <% errors.map = errors.mapped() %>
-  <% page.errorsList = errors.array({onlyFirstError:true}) %>
-  <% } %>
+  <%- include('partials/errors_hook') %>
   <body>
     <%- include('partials/nav') %>
     <h1>Log in</h1>
