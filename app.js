@@ -48,6 +48,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
   res.locals.user = req.user;
   res.locals.session = req.session;
+  res.locals.page = {};
   next();
 });
 
