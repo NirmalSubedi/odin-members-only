@@ -1,6 +1,7 @@
 // Environment variables
 export const NODE_ENV = process.env.NODE_ENV;
 export const CLUB_SECRET = process.env.CLUB_SECRET;
+export const ADMIN_SECRET = process.env.ADMIN_SECRET;
 export const connectionString = process.env.DATABASE_URL;
 
 // HTTP status codes
