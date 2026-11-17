@@ -13,6 +13,7 @@ import {
   TITLE_MAX_LENGTH,
   USERNAME_MAX_LENGTH,
 } from "../config.js";
+import * as db from "../db/queries.js";
 
 const empty_error = "must be filled.";
 
@@ -63,7 +64,13 @@ export const check_signup = [
     .withMessage(
       `Last name must be not exceed ${LAST_NAME_MAX_LENGTH} characters.`,
     ),
-  get_username_field_chain(),
+  get_username_field_chain()
+    .bail()
+    .custom(async (username) => {
+      const [user] = await db.select_user({ username });
+      if (user) throw new Error("Email already in use.");
+      return true;
+    }),
   get_password_field_chain(),
   body("confirm_password")
     .trim()
