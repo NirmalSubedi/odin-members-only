@@ -43,14 +43,6 @@ export const check_auth = (config) => (req, res, next) => {
   }
 };
 
-export const is_member = (req, res, next) => {
-  if (req.isAuthenticated() && req.user.is_member) {
-    next();
-  } else {
-    res.sendStatus(FORBIDDEN);
-  }
-};
-
 export const is_admin = (req, res, next) => {
   if (req.isAuthenticated() && req.user.is_admin) {
     next();
