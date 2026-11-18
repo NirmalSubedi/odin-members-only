@@ -46,6 +46,7 @@ import { pool } from "./db/pool.js";
 import { post_router } from "./post_router.js";
 import { club_router } from "./routes/club_router.js";
 import { index_router } from "./routes/index_router.js";
+import { user_router } from "./user_router.js";
 
 const app = express();
 const session_store = pg_simple(session);
@@ -76,20 +77,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(view_value_assignments);
 
 app.use(index_router);
+app.use(user_router);
 app.use(post_router);
 app.use(club_router);
 
-app
-  .route("/signup")
-  .get(get__signup)
-  .post(check_signup, correct_values_for("signup"), post__signup);
-
-app
-  .route("/login")
-  .get(get__login)
-  .post(check_login, correct_values_for("login"), post__login);
-
-app.route("/logout").get(get__logout);
 app.use(missing_resource_response);
 app.use(bad_request_handler);
 app.use(not_found_handler);
