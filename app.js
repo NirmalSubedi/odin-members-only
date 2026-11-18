@@ -68,6 +68,7 @@ app.get("/", async (req, res) => {
   res.render("home");
   if (req.user?.is_new_member) delete req.user.is_new_member;
 });
+
 app
   .route("/signup")
   .get((req, res) => {
@@ -89,6 +90,7 @@ app
       next(error);
     }
   });
+
 app
   .route("/login")
   .get((req, res) => {
@@ -114,12 +116,14 @@ app
       });
     })(req, res, next),
   );
+
 app.route("/logout").get((req, res, next) => {
   req.logout((error) => {
     if (error) return next(error);
     res.redirect("/");
   });
 });
+
 app
   .route("/join_club")
   .get(
@@ -145,6 +149,7 @@ app
       res.redirect("/");
     },
   );
+
 app
   .route("/new_post")
   .get(
