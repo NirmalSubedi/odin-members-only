@@ -32,6 +32,13 @@ import {
   post__new_post,
 } from "./controllers/post_controller.js";
 import {
+  get__login,
+  get__logout,
+  get__signup,
+  post__login,
+  post__signup,
+} from "./controllers/user_controller.js";
+import {
   check_join_club,
   check_login,
   check_new_post,
@@ -78,58 +85,15 @@ app.get("/", async (req, res) => {
 
 app
   .route("/signup")
-  .get((req, res) => {
-    res.locals.page.name = "signup";
-    res.render("signup");
-  })
-  .post(check_signup, correct_values_for("signup"), async (req, res, next) => {
-    try {
-      const new_user = matchedData(req);
-      new_user.password = await bcrypt.hash(new_user.password, SALT_LENGTH);
-      new_user.is_admin = new_user.admin_secret === ADMIN_SECRET;
-      new_user.is_member = new_user.is_admin;
-      const [user] = await db.insert_user(new_user);
-      req.login(user, (error) => {
-        if (error) return next(error);
-        res.redirect("/");
-      });
-    } catch (error) {
-      next(error);
-    }
-  });
+  .get(get__signup)
+  .post(check_signup, correct_values_for("signup"), post__signup);
 
 app
   .route("/login")
-  .get((req, res) => {
-    if (req.session?.locals_values) {
-      res.locals.values = req.session.locals_values;
-      delete req.session.locals_values;
-    }
-    res.locals.page.name = "login";
-    res.render("login");
-    if (req.session?.is_auth_fail) delete req.session.is_auth_fail;
-    if (req.session?.messages) req.session.messages.length = 0;
-  })
-  .post(check_login, correct_values_for("login"), (req, res, next) =>
-    passport.authenticate("local", (error, user, info) => {
-      if (error) return next(error);
-      if (!user) {
-        req.session.locals_values = matchedData(req, { onlyValidData: false });
-        return res.redirect("/login");
-      }
-      req.login(user, (error) => {
-        if (error) return next(error);
-        res.redirect("/");
-      });
-    })(req, res, next),
-  );
+  .get(get__login)
+  .post(check_login, correct_values_for("login"), post__login);
 
-app.route("/logout").get((req, res, next) => {
-  req.logout((error) => {
-    if (error) return next(error);
-    res.redirect("/");
-  });
-});
+app.route("/logout").get(get__logout);
 
 app
   .route("/join_club")
