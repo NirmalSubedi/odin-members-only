@@ -12,6 +12,16 @@
     <% if (locals.session?.is_auth_fail) { %>
       <p aria-live="assertive">You first must login to access that resource.</p>
     <% } %>
+
+      <% if (!locals.session?.is_auth_fail) { %>
+      <dialog open aria-live="polite">
+        <form method="dialog">
+          <span aria-live="assertive">You first must login to access that resource.</span>
+          <div><button type="submit">Ok</button></div>
+        </form>
+      </dialog>
+      <% } %>
+
     <% if(locals.session?.messages?.length>0) {%>
       <% const [path, err_msg] = locals.session.messages.at(-1).split(': ') %>
       <%- include('partials/errors_hook', {errors: { mapped: () => ({[path]:err_msg}), array: () => [{path, msg:err_msg}] }}) %>
