@@ -9,15 +9,12 @@
   <body>
     <%- include('partials/nav') %>
     <h1>Log in</h1>
-    <% if (locals.session?.is_auth_fail) { %>
-      <p aria-live="assertive">You first must login to access that resource.</p>
-    <% } %>
 
-      <% if (!locals.session?.is_auth_fail) { %>
+      <% if (locals.session?.is_auth_fail) { %>
       <dialog open aria-live="polite">
         <form method="dialog">
           <span aria-live="assertive">You first must login to access that resource.</span>
-          <div><button type="submit">Ok</button></div>
+          <div><button type="submit" autofocus>Ok</button></div>
         </form>
       </dialog>
       <% } %>
@@ -32,7 +29,7 @@
       <% if (!page.has_error) { %>
         <p>Fields with (*) are required.</p>
       <% } %>
-      <%- include('partials/input', {label:'Email', name:'username', type:'email', placeholder:'johndoe@example.com', required:true, autofocus:!page.has_error }) %>
+      <%- include('partials/input', {label:'Email', name:'username', type:'email', placeholder:'johndoe@example.com', required:true, autofocus:!page.has_error && !locals.session?.is_auth_fail}) %>
       <%- include('partials/input', {label:'Password', name:'password', type:'password',required:true }) %>
       <button type="submit">Log in</button>
     </form>
