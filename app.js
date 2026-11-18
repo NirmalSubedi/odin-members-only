@@ -3,6 +3,7 @@ import pg_simple from "connect-pg-simple";
 import express from "express";
 import session from "express-session";
 import { body, matchedData } from "express-validator";
+import path from "node:path";
 import passport from "passport";
 import {
   ADMIN_SECRET,
@@ -51,6 +52,7 @@ if (NODE_ENV === "production") {
 
 app.set("view engine", "ejs");
 
+app.use(express.static(path.join(import.meta.dirname, "public")));
 app.use(app_session);
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
