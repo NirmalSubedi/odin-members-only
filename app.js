@@ -23,6 +23,11 @@ import {
 } from "./controllers/error_controller.js";
 import { view_value_assignments } from "./controllers/global_controller.js";
 import {
+  get__new_post,
+  post__delete_post,
+  post__new_post,
+} from "./controllers/post_controller.js";
+import {
   check_join_club,
   check_login,
   check_new_post,
@@ -157,31 +162,16 @@ app
         res.redirect("/login");
       },
     }),
-    (req, res) => {
-      res.locals.page.name = "new_post";
-      res.render("new_post");
-    },
+    get__new_post,
   )
   .post(
     check_auth(),
     check_new_post,
     correct_values_for("new_post"),
-    async (req, res) => {
-      const new_post = {
-        username: req.user.username,
-        ...matchedData(req),
-      };
-      await db.insert_post(new_post);
-      res.redirect("/");
-    },
+    post__new_post,
   );
 
-app.post("/delete_post", is_admin, body("post_id"), async (req, res) => {
-  try {
-    await db.delete_post(matchedData(req));
-  } catch {}
-  res.redirect("/");
-});
+app.post("/delete_post", is_admin, body("post_id"), post__delete_post);
 
 app.use(missing_resource_response);
 app.use(bad_request_handler);
