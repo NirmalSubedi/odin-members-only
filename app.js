@@ -22,7 +22,10 @@ import {
   not_found_handler,
   server_error_handler,
 } from "./controllers/error_controller.js";
-import { view_value_assignments } from "./controllers/global_controller.js";
+import {
+  app_session,
+  view_value_assignments,
+} from "./controllers/global_controller.js";
 import { get__index } from "./controllers/index_controller.js";
 import {
   get__new_post,
@@ -49,24 +52,6 @@ import { index_router } from "./routes/index_router.js";
 import { user_router } from "./user_router.js";
 
 const app = express();
-const session_store = pg_simple(session);
-const app_session = session({
-  store: new session_store({
-    pool,
-    tableName: "user_sessions",
-    createTableIfMissing: true,
-  }),
-  secret: SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: SESSION_COOKIE_MAX_AGE,
-  },
-});
-
-if (NODE_ENV === "production") {
-  app_session.cookie.secure = true;
-}
 
 app.set("view engine", "ejs");
 
