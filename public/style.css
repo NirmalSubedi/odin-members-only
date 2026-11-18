@@ -10,10 +10,19 @@ body {
   margin: 0;
   display: grid;
   place-content: start center;
+  font-family:
+    system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 main {
   padding: 0 1rem 2rem;
+}
+
+@media (width>=52rem) {
+  main {
+    max-width: 50rem;
+  }
 }
 
 input,
@@ -42,10 +51,6 @@ h3 {
   text-wrap: balance;
 }
 
-nav {
-  max-width: 1200px;
-}
-
 nav ul {
   margin: 0;
   padding: 0;
@@ -66,6 +71,7 @@ nav a {
   padding: 0.5rem 0 1.5rem;
 }
 
+nav a:focus,
 nav a:hover {
   background-color: #eeeeee;
   text-decoration: underline;
