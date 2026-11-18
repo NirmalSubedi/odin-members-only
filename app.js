@@ -42,7 +42,7 @@ const app_session = session({
   }),
   secret: "a",
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
     maxAge: SESSION_COOKIE_MAX_AGE,
   },
