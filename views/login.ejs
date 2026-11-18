@@ -10,8 +10,8 @@
     <%- include('partials/nav') %>
     <h1>Log in</h1>
 
-      <% if (locals.session?.is_auth_fail) { %>
-      <dialog open aria-live="polite">
+      <% if (!locals.session?.is_auth_fail) { %>
+      <dialog open>
         <form method="dialog">
           <span aria-live="assertive">You first must login to access that resource.</span>
           <div><button type="submit" autofocus>Ok</button></div>
