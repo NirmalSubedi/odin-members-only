@@ -1,3 +1,73 @@
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
   line-height: 1.6;
+  margin: 0;
+  display: grid;
+  place-content: start center;
+}
+
+main {
+  padding: 0 1rem 2rem;
+}
+
+input,
+textarea,
+button {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+nav {
+  max-width: 1200px;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+nav li {
+  flex: 1 1 0;
+  text-align: center;
+  display: flex;
+}
+
+nav a {
+  flex: 1 1 0;
+  text-decoration: none;
+  padding: 0.5rem 0 1.5rem;
+}
+
+nav a:hover {
+  background-color: #eeeeee;
+  text-decoration: underline;
+  padding: 1rem 0;
 }

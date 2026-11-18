@@ -1,6 +1,6 @@
 <nav>
   <ul>
-    <li><a href="./">Home</a></li>
+    <li class="home"><a href="./">Home</a></li>
     <% if (locals.user && !locals.user.is_member) { %>
     <li><a href="<%- include('fragment', {path:'./join_club'}) %>">Join club</a></li>
     <% } %>
