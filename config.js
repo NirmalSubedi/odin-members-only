@@ -1,7 +1,7 @@
 // Environment variables
 export const NODE_ENV = process.env.NODE_ENV;
 export const CLUB_SECRET = process.env.CLUB_SECRET;
-export const SERVER_PORT = process.env.SERVER_PORT;
+export const PORT = process.env.PORT;
 export const ADMIN_SECRET = process.env.ADMIN_SECRET;
 export const SESSION_SECRET = process.env.SESSION_SECRET;
 export const connectionString = process.env.DATABASE_URL;

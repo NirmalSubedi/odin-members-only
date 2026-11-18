@@ -1,7 +1,7 @@
 import express from "express";
 import path from "node:path";
 import passport from "passport";
-import { SERVER_PORT } from "./config.js";
+import { PORT } from "./config.js";
 import {
   bad_request_handler,
   missing_resource_response,
@@ -39,7 +39,7 @@ app.use(bad_request_handler);
 app.use(not_found_handler);
 app.use(server_error_handler);
 
-app.listen(SERVER_PORT, (error) => {
+app.listen(PORT, (error) => {
   if (error) throw error;
-  console.log(`App running on port ${SERVER_PORT}`);
+  console.log(`App running on port ${PORT}`);
 });
