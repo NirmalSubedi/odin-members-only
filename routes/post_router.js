@@ -1,13 +1,13 @@
 import express from "express";
 import { body } from "express-validator";
-import { check_auth, is_admin } from "./controllers/auth_controller.js";
-import { correct_values_for } from "./controllers/error_controller.js";
+import { check_auth, is_admin } from "../controllers/auth_controller.js";
+import { correct_values_for } from "../controllers/error_controller.js";
 import {
   get__new_post,
   post__delete_post,
   post__new_post,
-} from "./controllers/post_controller.js";
-import { check_new_post } from "./controllers/validate_controller.js";
+} from "../controllers/post_controller.js";
+import { check_new_post } from "../controllers/validate_controller.js";
 
 export const post_router = express.Router();
 

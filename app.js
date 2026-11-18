@@ -13,10 +13,10 @@ import {
   request_logger,
   view_value_assigner,
 } from "./controllers/global_controller.js";
-import { post_router } from "./post_router.js";
 import { club_router } from "./routes/club_router.js";
 import { index_router } from "./routes/index_router.js";
-import { user_router } from "./user_router.js";
+import { post_router } from "./routes/post_router.js";
+import { user_router } from "./routes/user_router.js";
 
 const app = express();
 

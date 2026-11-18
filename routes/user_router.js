@@ -1,16 +1,16 @@
 import express from "express";
-import { correct_values_for } from "./controllers/error_controller.js";
+import { correct_values_for } from "../controllers/error_controller.js";
 import {
   get__login,
   get__logout,
   get__signup,
   post__login,
   post__signup,
-} from "./controllers/user_controller.js";
+} from "../controllers/user_controller.js";
 import {
   check_login,
   check_signup,
-} from "./controllers/validate_controller.js";
+} from "../controllers/validate_controller.js";
 
 export const user_router = express.Router();
 
