@@ -44,6 +44,7 @@ import {
 } from "./controllers/validate_controller.js";
 import { pool } from "./db/pool.js";
 import { post_router } from "./post_router.js";
+import { club_router } from "./routes/club_router.js";
 import { index_router } from "./routes/index_router.js";
 
 const app = express();
@@ -76,6 +77,8 @@ app.use(view_value_assignments);
 
 app.use(index_router);
 app.use(post_router);
+app.use(club_router);
+
 app
   .route("/signup")
   .get(get__signup)
@@ -87,25 +90,6 @@ app
   .post(check_login, correct_values_for("login"), post__login);
 
 app.route("/logout").get(get__logout);
-
-app
-  .route("/join_club")
-  .get(
-    check_auth({
-      on_fail: (req, res) => {
-        req.session.is_auth_fail = true;
-        res.redirect("/login");
-      },
-    }),
-    get__join_club,
-  )
-  .post(
-    check_auth(),
-    check_join_club,
-    correct_values_for("join_club"),
-    post__join_club,
-  );
-
 app.use(missing_resource_response);
 app.use(bad_request_handler);
 app.use(not_found_handler);
