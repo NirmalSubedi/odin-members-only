@@ -4,11 +4,13 @@
     type="<%= locals.type || 'text' %>"
     name="<%= locals.name %>"
     id="<%= locals.name %>"
-    aria-describedby="<%= locals.name %>_error"
     <%if(locals.autofocus) { %>autofocus<% } %>
     <%if(locals.placeholder){ %>placeholder='<%= placeholder %>'<% } %>
     <%if(locals.values?.[locals.name]){ %>value='<%= values[locals.name] %>'<% } %>
     <%if(locals.required){ %>required<% } %>
-    <%if(locals?.errors?.map?.[locals.name]){ %>aria-invalid="true"<% } %>
+    <% if (locals?.errors?.map?.[locals.name]) { %>
+      aria-describedby="<%= locals.name %>_error"
+      aria-invalid="true"
+    <% } %>
   >
 </div>

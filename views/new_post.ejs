@@ -17,7 +17,7 @@
         <%- include('partials/input', {label:'Title', name:'title', placeholder:'What would like to title your post?', required: true, autofocus:!page.has_error}) %>
         <div>
           <label for="body">Body <%= page.has_error ? '(required)' : '*' %></label>
-          <textarea name="body" id="body" placeholder="What is on your mind?" aria-describedby="body_error" required <%if(locals?.errors?.map?.['body']) {%>aria-invalid="true"<% } %>><%if(locals.values?.['body']){%><%= values['body'] %><% } %></textarea>
+          <textarea name="body" id="body" placeholder="What is on your mind?" required <%if(locals?.errors?.map?.['body']) {%>aria-describedby="body_error" aria-invalid="true"<% } %>><%if(locals.values?.['body']){%><%= values['body'] %><% } %></textarea>
         </div>
         <button type="submit">Post</button>
       </form>
