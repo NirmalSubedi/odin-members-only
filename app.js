@@ -43,6 +43,7 @@ import {
   check_signup,
 } from "./controllers/validate_controller.js";
 import { pool } from "./db/pool.js";
+import { post_router } from "./post_router.js";
 import { index_router } from "./routes/index_router.js";
 
 const app = express();
@@ -73,7 +74,8 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
 app.use(view_value_assignments);
 
-app.use("/", index_router);
+app.use(index_router);
+app.use(post_router);
 app
   .route("/signup")
   .get(get__signup)
@@ -103,26 +105,6 @@ app
     correct_values_for("join_club"),
     post__join_club,
   );
-
-app
-  .route("/new_post")
-  .get(
-    check_auth({
-      on_fail: (req, res) => {
-        req.session.is_auth_fail = true;
-        res.redirect("/login");
-      },
-    }),
-    get__new_post,
-  )
-  .post(
-    check_auth(),
-    check_new_post,
-    correct_values_for("new_post"),
-    post__new_post,
-  );
-
-app.post("/delete_post", is_admin, body("post_id"), post__delete_post);
 
 app.use(missing_resource_response);
 app.use(bad_request_handler);
