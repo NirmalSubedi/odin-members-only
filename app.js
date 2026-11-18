@@ -26,6 +26,7 @@ import {
   server_error_handler,
 } from "./controllers/error_controller.js";
 import { view_value_assignments } from "./controllers/global_controller.js";
+import { get__index } from "./controllers/index_controller.js";
 import {
   get__new_post,
   post__delete_post,
@@ -75,13 +76,7 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
 app.use(view_value_assignments);
 
-app.get("/", async (req, res) => {
-  const posts = await db.select_all_posts();
-  res.locals.posts = posts;
-  res.locals.page.name = "home";
-  res.render("home");
-  if (req.user?.is_new_member) delete req.user.is_new_member;
-});
+app.get("/", get__index);
 
 app
   .route("/signup")
