@@ -10,7 +10,9 @@
     <h1>New post</h1>
     <%- include('partials/errors') %>
     <form action="/new_post" method="post">
-      <p>Fields with (*) are required.</p>
+      <% if (!page.has_error) { %>
+        <p>Fields with (*) are required.</p>
+      <% } %>
       <%- include('partials/input', {label:'Title', name:'title', placeholder:'What would like to title your post?', required: true, autofocus:!page.has_error}) %>
       <div>
         <label for="body">Body <%= page.has_error ? '(required)' : '*' %></label>
