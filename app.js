@@ -10,7 +10,8 @@ import {
 } from "./controllers/error_controller.js";
 import {
   app_session,
-  view_value_assignments,
+  request_logger,
+  view_value_assigner,
 } from "./controllers/global_controller.js";
 import { post_router } from "./post_router.js";
 import { club_router } from "./routes/club_router.js";
@@ -21,11 +22,12 @@ const app = express();
 
 app.set("view engine", "ejs");
 
+app.use(request_logger);
 app.use(express.static(path.join(import.meta.dirname, "public")));
 app.use(app_session);
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
-app.use(view_value_assignments);
+app.use(view_value_assigner);
 
 app.use(index_router);
 app.use(user_router);

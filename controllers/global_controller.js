@@ -22,9 +22,25 @@ if (NODE_ENV === "production") {
   app_session.cookie.secure = true;
 }
 
-export const view_value_assignments = (req, res, next) => {
+export const view_value_assigner = (req, res, next) => {
   res.locals.user = req.user;
   res.locals.session = req.session;
   res.locals.page = {};
+  next();
+};
+
+export const request_logger = (req, res, next) => {
+  const requestStartTime = performance.now();
+  const timeOfRequest = new Date().toISOString();
+
+  res.once("close", () => {
+    const responseDuration =
+      (performance.now() - requestStartTime).toFixed(4) + "ms";
+
+    console.log(
+      `${timeOfRequest} - ${req.method} ${req.originalUrl} ${res.statusCode} - ${responseDuration}`,
+    );
+  });
+
   next();
 };
