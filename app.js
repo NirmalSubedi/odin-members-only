@@ -10,6 +10,7 @@ import {
   SALT_LENGTH,
   SERVER_PORT,
   SESSION_COOKIE_MAX_AGE,
+  SESSION_SECRET,
 } from "./config.js";
 import {
   authenticate_user,
@@ -40,7 +41,7 @@ const app_session = session({
     tableName: "user_sessions",
     createTableIfMissing: true,
   }),
-  secret: "a",
+  secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
