@@ -12,11 +12,7 @@ import {
   SESSION_COOKIE_MAX_AGE,
   SESSION_SECRET,
 } from "./config.js";
-import {
-  authenticate_user,
-  check_auth,
-  is_admin,
-} from "./controllers/auth_controller.js";
+import { check_auth, is_admin } from "./controllers/auth_controller.js";
 import {
   bad_request_handler,
   correct_values_for,
@@ -105,14 +101,18 @@ app
     if (req.session?.is_auth_fail) delete req.session.is_auth_fail;
     if (req.session?.messages) req.session.messages.length = 0;
   })
-  .post(
-    check_login,
-    correct_values_for("login"),
-    (req, res, next) => {
-      req.session.locals_values = matchedData(req, { onlyValidData: false });
-      next();
-    },
-    authenticate_user,
+  .post(check_login, correct_values_for("login"), (req, res, next) =>
+    passport.authenticate("local", (error, user, info) => {
+      if (error) return next(error);
+      if (!user) {
+        req.session.locals_values = matchedData(req, { onlyValidData: false });
+        return res.redirect("/login");
+      }
+      req.login(user, (error) => {
+        if (error) return next(error);
+        res.redirect("/");
+      });
+    })(req, res, next),
   );
 app.route("/logout").get((req, res, next) => {
   req.logout((error) => {
