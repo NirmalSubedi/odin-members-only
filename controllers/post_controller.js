@@ -1,3 +1,6 @@
+import { matchedData } from "express-validator";
+import * as db from "../db/queries.js";
+
 export const get__new_post = (req, res) => {
   res.locals.page.name = "new_post";
   res.render("new_post");
