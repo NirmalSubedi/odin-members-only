@@ -55,7 +55,7 @@ if (NODE_ENV === "production") {
 
 app.set("view engine", "ejs");
 
-app.use(session);
+app.use(app_session);
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
