@@ -43,6 +43,7 @@ import {
   check_signup,
 } from "./controllers/validate_controller.js";
 import { pool } from "./db/pool.js";
+import { index_router } from "./routes/index_router.js";
 
 const app = express();
 const session_store = pg_simple(session);
@@ -72,8 +73,7 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
 app.use(view_value_assignments);
 
-app.get("/", get__index);
-
+app.use("/", index_router);
 app
   .route("/signup")
   .get(get__signup)
