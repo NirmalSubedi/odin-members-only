@@ -33,4 +33,4 @@ export const BODY_MAX_LENGTH = 5e3;
 
 // Server values
 export const SALT_LENGTH = 14;
-export const SESSION_COOKIE_MAX_AGE = 1000 * 60 * 60 * 24; // 1 day (ms)
+export const SESSION_COOKIE_MAX_AGE = 1000 * 60 * 60 * 24 * 7; // 7 days (ms)
