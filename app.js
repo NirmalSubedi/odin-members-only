@@ -4,7 +4,12 @@ import express from "express";
 import session from "express-session";
 import { body, matchedData } from "express-validator";
 import passport from "passport";
-import { ADMIN_SECRET, SALT_LENGTH, SERVER_PORT } from "./config.js";
+import {
+  ADMIN_SECRET,
+  SALT_LENGTH,
+  SERVER_PORT,
+  SESSION_COOKIE_MAX_AGE,
+} from "./config.js";
 import {
   authenticate_user,
   check_auth,
@@ -41,6 +46,9 @@ app.use(
     secret: "a",
     resave: false,
     saveUninitialized: true,
+    cookie: {
+      maxAge: SESSION_COOKIE_MAX_AGE,
+    },
   }),
 );
 app.use(passport.session());
