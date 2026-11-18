@@ -161,7 +161,9 @@ app
   );
 
 app.post("/delete_post", is_admin, body("post_id"), async (req, res) => {
-  await db.delete_post(matchedData(req));
+  try {
+    await db.delete_post(matchedData(req));
+  } catch {}
   res.redirect("/");
 });
 
