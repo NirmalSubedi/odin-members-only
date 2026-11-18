@@ -1,17 +1,17 @@
 <nav>
   <ul>
     <li><a href="./">Home</a></li>
-    <% if (!locals.user) { %>
-    <li><a href="<%- include('fragment', {path:'./signup'}) %>">Sign up</a></li>
-    <li><a href="<%- include('fragment', {path:'./login'}) %>">Log in</a></li>
-    <% } else { %>
-    <li><a href="./logout">Log out</a></li>
-    <% } %>
     <% if (locals.user && !locals.user.is_member) { %>
     <li><a href="<%- include('fragment', {path:'./join_club'}) %>">Join club</a></li>
     <% } %>
     <% if (locals.user) { %>
     <li><a href="<%- include('fragment', {path:'./new_post'}) %>">New post</a></li>
+    <% } %>
+    <% if (!locals.user) { %>
+    <li><a href="<%- include('fragment', {path:'./login'}) %>">Log in</a></li>
+    <li><a href="<%- include('fragment', {path:'./signup'}) %>">Sign up</a></li>
+    <% } else { %>
+    <li><a href="./logout">Log out</a></li>
     <% } %>
   </ul>
 </nav>
