@@ -3,7 +3,7 @@ import session from "express-session";
 import { NODE_ENV, SESSION_COOKIE_MAX_AGE, SESSION_SECRET } from "../config.js";
 import { pool } from "../db/pool.js";
 
-export const session_store = pg_simple(session);
+const session_store = pg_simple(session);
 export const app_session = session({
   store: new session_store({
     pool,
