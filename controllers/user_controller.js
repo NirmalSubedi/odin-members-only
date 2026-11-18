@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { matchedData } from "express-validator";
 import passport from "passport";
+import { ADMIN_SECRET, SALT_LENGTH } from "../config.js";
 import * as db from "../db/queries.js";
 
 export const get__signup = (req, res) => {

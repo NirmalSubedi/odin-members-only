@@ -1,14 +1,11 @@
-import bcrypt from "bcrypt";
 import pg_simple from "connect-pg-simple";
 import express from "express";
 import session from "express-session";
-import { body, matchedData } from "express-validator";
+import { body } from "express-validator";
 import path from "node:path";
 import passport from "passport";
 import {
-  ADMIN_SECRET,
   NODE_ENV,
-  SALT_LENGTH,
   SERVER_PORT,
   SESSION_COOKIE_MAX_AGE,
   SESSION_SECRET,
@@ -46,7 +43,6 @@ import {
   check_signup,
 } from "./controllers/validate_controller.js";
 import { pool } from "./db/pool.js";
-import * as db from "./db/queries.js";
 
 const app = express();
 const session_store = pg_simple(session);
