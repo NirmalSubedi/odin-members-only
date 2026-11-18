@@ -15,6 +15,10 @@ import {
 } from "./config.js";
 import { check_auth, is_admin } from "./controllers/auth_controller.js";
 import {
+  get__join_club,
+  post__join_club,
+} from "./controllers/club_controller.js";
+import {
   bad_request_handler,
   correct_values_for,
   missing_resource_response,
@@ -136,21 +140,13 @@ app
         res.redirect("/login");
       },
     }),
-    (req, res) => {
-      res.locals.page.name = "join_club";
-      res.render("join_club");
-    },
+    get__join_club,
   )
   .post(
     check_auth(),
     check_join_club,
     correct_values_for("join_club"),
-    async (req, res) => {
-      await db.update_user_to_member(req.user);
-      req.user.is_member = true;
-      req.user.is_new_member = true;
-      res.redirect("/");
-    },
+    post__join_club,
   );
 
 app
