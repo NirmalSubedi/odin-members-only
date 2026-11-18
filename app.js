@@ -6,6 +6,7 @@ import { body, matchedData } from "express-validator";
 import passport from "passport";
 import {
   ADMIN_SECRET,
+  NODE_ENV,
   SALT_LENGTH,
   SERVER_PORT,
   SESSION_COOKIE_MAX_AGE,
@@ -33,24 +34,27 @@ import * as db from "./db/queries.js";
 
 const app = express();
 const session_store = pg_simple(session);
+const app_session = session({
+  store: new session_store({
+    pool,
+    tableName: "user_sessions",
+    createTableIfMissing: true,
+  }),
+  secret: "a",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: SESSION_COOKIE_MAX_AGE,
+  },
+});
+
+if (NODE_ENV === "production") {
+  app_session.cookie.secure = true;
+}
 
 app.set("view engine", "ejs");
 
-app.use(
-  session({
-    store: new session_store({
-      pool,
-      tableName: "user_sessions",
-      createTableIfMissing: true,
-    }),
-    secret: "a",
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      maxAge: SESSION_COOKIE_MAX_AGE,
-    },
-  }),
-);
+app.use(session);
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
