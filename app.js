@@ -21,6 +21,7 @@ import {
   not_found_handler,
   server_error_handler,
 } from "./controllers/error_controller.js";
+import { view_value_assignments } from "./controllers/global_controller.js";
 import {
   check_join_club,
   check_login,
@@ -56,12 +57,7 @@ app.use(express.static(path.join(import.meta.dirname, "public")));
 app.use(app_session);
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
-app.use((req, res, next) => {
-  res.locals.user = req.user;
-  res.locals.session = req.session;
-  res.locals.page = {};
-  next();
-});
+app.use(view_value_assignments);
 
 app.get("/", async (req, res) => {
   const posts = await db.select_all_posts();
