@@ -10,29 +10,31 @@
   <body>
     <%- include('partials/nav') %>
     <main>
-      <h1>Log in</h1>
-        <% if (locals.session?.is_auth_fail) { %>
-        <dialog open closedby="closerequest">
-          <form method="dialog">
-            <span aria-live="assertive">You first must login to access that resource.</span>
-            <div><button type="submit" autofocus>Ok</button></div>
-          </form>
-        </dialog>
+      <div class="form_layout_box">
+        <h1 class="form_heading">Log in</h1>
+          <% if (locals.session?.is_auth_fail) { %>
+          <dialog open closedby="closerequest">
+            <form method="dialog">
+              <span aria-live="assertive">You first must login to access that resource.</span>
+              <div><button type="submit" autofocus>Ok</button></div>
+            </form>
+          </dialog>
+          <% } %>
+        <% if(locals.session?.messages?.length>0) {%>
+          <% const [path, err_msg] = locals.session.messages.at(-1).split(': ') %>
+          <%- include('partials/errors_hook', {errors: { mapped: () => ({[path]:err_msg}), array: () => [{path, msg:err_msg}] }}) %>
         <% } %>
-      <% if(locals.session?.messages?.length>0) {%>
-        <% const [path, err_msg] = locals.session.messages.at(-1).split(': ') %>
-        <%- include('partials/errors_hook', {errors: { mapped: () => ({[path]:err_msg}), array: () => [{path, msg:err_msg}] }}) %>
-      <% } %>
-      <%- include('partials/errors') %>
-      <form action="/login" method="post">
-        <% if (!page.has_error) { %>
-          <p>Fields with (*) are required.</p>
-        <% } %>
-        <%- include('partials/input', {label:'Email', name:'username', type:'email', placeholder:'johndoe@example.com', required:true, autofocus:!page.has_error && !locals.session?.is_auth_fail}) %>
-        <%- include('partials/input', {label:'Password', name:'password', type:'password',required:true }) %>
-        <button type="submit">Log in</button>
-      </form>
-      <p>Don't have an account? <a href="./signup">Sign up</a> for an account.</p>
+        <%- include('partials/errors') %>
+        <form action="/login" method="post" class="form login_form">
+          <% if (!page.has_error) { %>
+            <p>Fields with (<span class="field_required_text">*</span>) are required.</p>
+          <% } %>
+          <%- include('partials/input', {label:'Email', name:'username', type:'email', placeholder:'johndoe@example.com', required:true, autofocus:!page.has_error && !locals.session?.is_auth_fail}) %>
+          <%- include('partials/input', {label:'Password', name:'password', type:'password',required:true }) %>
+          <button type="submit" class="form_submit_btn">Log in</button>
+        </form>
+        <p class="redirect_message">Don't have an account? <a href="./signup">Sign up</a> for an account.</p>    
+      </div>
     </main>
   </body>
 </html>
