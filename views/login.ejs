@@ -27,7 +27,7 @@
         <%- include('partials/errors') %>
         <form action="/login" method="post" class="form login_form">
           <% if (!page.has_error) { %>
-            <p>Fields with (<span class="field_required_text">*</span>) are required.</p>
+            <p class="form_note">Fields with (<span class="field_required_text">*</span>) are required.</p>
           <% } %>
           <%- include('partials/input', {label:'Email', name:'username', type:'email', placeholder:'johndoe@example.com', required:true, autofocus:!page.has_error && !locals.session?.is_auth_fail}) %>
           <%- include('partials/input', {label:'Password', name:'password', type:'password',required:true }) %>
