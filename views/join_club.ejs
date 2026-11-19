@@ -10,15 +10,17 @@
   <body>
     <%- include('partials/nav') %>
     <main>
-      <h1>Join club</h1>
-      <%- include('partials/errors', {get_list_name: (errors)=> `Error${errors.length>1?'s':''}:`}) %>
-      <form action="/join_club" method="post">
-        <% if (!page.has_error) { %>
-        <p>Fields with (*) are required.</p>
-        <% } %>
-        <%- include('partials/input', {label:'What do you call a funny mountain?', name:'club_secret', placeholder:'Enter you guess here...', required:true, autofocus:!page.has_error }) %>
-        <button type="submit">Guess</button>
-      </form>
+      <div class="form_layout_box">
+        <h1 class="form_heading">Join club</h1>
+        <%- include('partials/errors', {get_list_name: (errors)=> `Error${errors.length>1?'s':''}:`}) %>
+        <form action="/join_club" method="post" class="form">
+          <% if (!page.has_error) { %>
+          <p class="form_note">Fields with (<span class="field_required_text">*</span>) are required.</p>
+          <% } %>
+          <%- include('partials/input', {label:'What do you call a funny mountain?', name:'club_secret', placeholder:'Enter you guess here...', required:true, autofocus:!page.has_error }) %>
+          <button type="submit" class="form_submit_btn">Guess</button>
+        </form>
+      </div>
     </main>
   </body>
 </html>
