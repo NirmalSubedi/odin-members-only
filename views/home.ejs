@@ -13,10 +13,10 @@
         <h1 class="welcome_message_heading">Welcome to the homepage<%= locals.user?` ${user.first_name} ${user.last_name} (${user.username})`: '' %>!</h1>
         
         <% if (locals.user?.is_new_member) { %>
-        <dialog open closedby="any">
+        <dialog open closedby="any" class="dialog">
           <form method="dialog">
-            <span aria-live="polite">Congratulation on joining the club. Get acquainted with your fellow club members by reading their posts or by creating your own posts to share.</span>
-            <div><button type="submit" autofocus>Ok</button></div>
+            <p aria-live="polite" class="dialog_message">Congratulation on joining the club. Get acquainted with your fellow club members by reading their posts or by creating your own posts to share.</p>
+            <button type="submit" autofocus class="dialog_btn">Ok</button>
           </form>
         </dialog>
         <% } %>

@@ -306,8 +306,10 @@ h3 {
 
 .dialog_message {
   font-family: var(--ff-serif);
-  font-size: var(--fs-h6);
+  font-size: var(--fs-base);
   font-weight: 600;
+  max-width: 50ch;
+  line-height: 1.5;
 }
 
 .dialog_btn {
