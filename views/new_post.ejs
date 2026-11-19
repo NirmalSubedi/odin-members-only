@@ -20,7 +20,7 @@
           <%- include('partials/input', {label:'Title', name:'title', placeholder:'What would like to title your post?', required: true, autofocus:!page.has_error}) %>
           <div class="form_field">
             <label for="body" class="form_label">Body<span class="field_required_text">*</span></label>
-            <textarea name="body" class="form_input" id="body" placeholder="What is on your mind?" required <%if(locals?.errors?.map?.['body']) {%>aria-describedby="body_error" aria-invalid="true"<% } %>><%if(locals.values?.['body']){%><%= values['body'] %><% } %></textarea>
+            <textarea name="body" rows="10" class="form_input" id="body" placeholder="What is on your mind?" required <%if(locals?.errors?.map?.['body']) {%>aria-describedby="body_error" aria-invalid="true"<% } %>><%if(locals.values?.['body']){%><%= values['body'] %><% } %></textarea>
           </div>
           <button type="submit" class="form_submit_btn">Post</button>
         </form>    
