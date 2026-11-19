@@ -21,6 +21,7 @@ import { user_router } from "./routes/user_router.js";
 const app = express();
 
 app.set("view engine", "ejs");
+app.set("trust proxy", 1);
 
 app.use(request_logger);
 app.use(express.static(path.join(import.meta.dirname, "public")));
