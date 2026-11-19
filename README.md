@@ -2,7 +2,7 @@
 
 Any non-members are left pondering who wrote the post and when was it written. While, members know exactly who and when. And to go further, admins moderate posts and ensure everyone is getting along nicely! :)
 
-[Become a member today!]()
+[Become a member today!](https://odin-members-only-tz3u.onrender.com/)
 
 ##
 
