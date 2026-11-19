@@ -13,7 +13,7 @@
       <div class="form_layout_box">
         <h1 class="form_heading">Sign up</h1>
         <%- include('partials/errors') %>
-        <form action="/signup" method="post" class="form signup_form">
+        <form action="/signup" method="post" class="form">
           <% if (!page.has_error) { %>
           <p class="form_note">Fields with (<span class="field_required_text">*</span>) are required.</p>
           <% } %>
