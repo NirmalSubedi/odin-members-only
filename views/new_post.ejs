@@ -10,19 +10,21 @@
   <body>
     <%- include('partials/nav') %>
     <main>
-      <h1>New post</h1>
-      <%- include('partials/errors') %>
-      <form action="/new_post" method="post">
-        <% if (!page.has_error) { %>
-          <p>Fields with (*) are required.</p>
-        <% } %>
-        <%- include('partials/input', {label:'Title', name:'title', placeholder:'What would like to title your post?', required: true, autofocus:!page.has_error}) %>
-        <div>
-          <label for="body">Body <%= page.has_error ? '(required)' : '*' %></label>
-          <textarea name="body" id="body" placeholder="What is on your mind?" required <%if(locals?.errors?.map?.['body']) {%>aria-describedby="body_error" aria-invalid="true"<% } %>><%if(locals.values?.['body']){%><%= values['body'] %><% } %></textarea>
-        </div>
-        <button type="submit">Post</button>
-      </form>
+      <div class="form_layout_box">
+        <h1 class="form_heading">New post</h1>
+        <%- include('partials/errors') %>
+        <form action="/new_post" method="post" class="form">
+          <% if (!page.has_error) { %>
+            <p class="form_note">Fields with (<span class="field_required_text">*</span>) are required.</p>
+          <% } %>
+          <%- include('partials/input', {label:'Title', name:'title', placeholder:'What would like to title your post?', required: true, autofocus:!page.has_error}) %>
+          <div class="form_field">
+            <label for="body" class="form_label">Body<span class="field_required_text">*</span></label>
+            <textarea name="body" class="form_input" id="body" placeholder="What is on your mind?" required <%if(locals?.errors?.map?.['body']) {%>aria-describedby="body_error" aria-invalid="true"<% } %>><%if(locals.values?.['body']){%><%= values['body'] %><% } %></textarea>
+          </div>
+          <button type="submit" class="form_submit_btn">Post</button>
+        </form>    
+      </div>
     </main>
   </body>
 </html>
