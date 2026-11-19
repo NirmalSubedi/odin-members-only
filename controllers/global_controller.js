@@ -18,10 +18,6 @@ export const app_session = session({
   },
 });
 
-if (NODE_ENV === "production") {
-  app_session.cookie.secure = true;
-}
-
 export const view_value_assigner = (req, res, next) => {
   res.locals.user = req.user;
   res.locals.session = req.session;
