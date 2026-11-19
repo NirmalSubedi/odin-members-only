@@ -46,12 +46,6 @@ main {
   margin-bottom: 5rem;
 }
 
-@media (width>=52rem) {
-  main {
-    max-width: 50rem;
-  }
-}
-
 input,
 textarea,
 button {
@@ -65,17 +59,14 @@ h3,
 h4,
 h5,
 h6 {
-  overflow-wrap: break-word;
-}
-
-p {
-  text-wrap: pretty;
+  overflow-wrap: anywhere;
 }
 
 h1,
 h2,
-h3 {
-  text-wrap: balance;
+h3,
+p {
+  text-wrap: pretty;
 }
 
 .nav {
@@ -83,7 +74,7 @@ h3 {
   border-top: 0;
 }
 
-@media (width>=52rem) {
+@media (width>=50rem) {
   .nav {
     min-width: 52rem;
   }
@@ -121,15 +112,21 @@ h3 {
   padding: 1rem 0;
 }
 
+.home_layout_box {
+  max-width: 66ch;
+  margin: 0 auto;
+}
+
 .welcome_message_box {
   padding: 2.5rem 0 2rem;
   display: grid;
   gap: 1rem;
+  text-align: center;
 }
 
 .welcome_message_heading {
   margin: 0;
-  font-size: var(--fs-h5);
+  font-size: var(--fs-h4);
   line-height: 1.2;
 }
 
@@ -170,7 +167,7 @@ h3 {
 }
 
 .post_body {
-  line-height: 1.6;
+  line-height: 1.5;
   margin: 0;
   font-size: var(--fs-base);
   font-family: var(--ff-sans);
