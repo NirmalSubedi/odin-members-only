@@ -1,6 +1,7 @@
-<div>
-  <label for="<%= locals.name %>"><%= locals.label %> <% if(locals.required){%><span><%= page.has_error ? '(required)' : '*' %></span><% } %></label>
+<div class="form_field">
+  <label class="form_label" for="<%= locals.name %>"><%= locals.label %><% if(locals.required){%><span class="field_required_text">*</span><% } %></label>
   <input
+  class="form_input"
     type="<%= locals.type || 'text' %>"
     name="<%= locals.name %>"
     id="<%= locals.name %>"

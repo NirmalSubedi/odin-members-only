@@ -68,7 +68,7 @@ export const check_signup = [
     .bail()
     .custom(async (username) => {
       const [user] = await db.select_user({ username });
-      if (user) throw new Error("Email already in use.");
+      if (user) throw new Error("Email is already in use.");
       return true;
     }),
   get_password_field_chain(),

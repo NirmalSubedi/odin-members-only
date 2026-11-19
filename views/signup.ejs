@@ -10,21 +10,23 @@
   <body>
     <%- include('partials/nav') %>
     <main>
-      <h1>Sign up</h1>
-      <%- include('partials/errors') %>
-      <form action="/signup" method="post">
-        <% if (!page.has_error) { %>
-        <p>Fields with (*) are required.</p>
-        <% } %>
-        <%- include('partials/input', {label:'First name', name:'first_name', placeholder:'John', required: true, autofocus: !page.has_error}) %>
-        <%- include('partials/input', {label:'Last name', name:'last_name', placeholder:'Doe', required: true}) %>
-        <%- include('partials/input', {label:'Email', name:'username', type:'email', placeholder:'johndoe@example.com', required: true}) %>
-        <%- include('partials/input', {label:'Password', name:'password', type:'password', required: true}) %>
-        <%- include('partials/input', {label:'Confirm password', name:'confirm_password', type:'password', required: true}) %>
-        <%- include('partials/input', {label:"For admin: What is seen in the middle of March and April that can't be seen at the beginning or end of either month?", name:'admin_secret'}) %>
-        <button type="submit">Sign up</button>
-      </form>
-      <p>Already have an account? <a href="./login">Log in</a></p>
+      <div class="form_layout_box">
+        <h1 class="form_heading">Sign up</h1>
+        <%- include('partials/errors') %>
+        <form action="/signup" method="post" class="form signup_form">
+          <% if (!page.has_error) { %>
+          <p class="form_note">Fields with (<span class="field_required_text">*</span>) are required.</p>
+          <% } %>
+          <%- include('partials/input', {label:'First name', name:'first_name', placeholder:'John', required: true, autofocus: !page.has_error}) %>
+          <%- include('partials/input', {label:'Last name', name:'last_name', placeholder:'Doe', required: true}) %>
+          <%- include('partials/input', {label:'Email', name:'username', type:'email', placeholder:'johndoe@example.com', required: true}) %>
+          <%- include('partials/input', {label:'Password', name:'password', type:'password', required: true}) %>
+          <%- include('partials/input', {label:'Confirm password', name:'confirm_password', type:'password', required: true}) %>
+          <%- include('partials/input', {label:"For admin: What is seen in the middle of March and April that can't be seen at the beginning or end of either month?", name:'admin_secret'}) %>
+          <button type="submit" class="form_submit_btn">Sign up</button>
+        </form>
+        <p class="redirect_message">Already have an account? <a href="./login">Log in</a></p>  
+      </div>
     </main>
   </body>
 </html>
