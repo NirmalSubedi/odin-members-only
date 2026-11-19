@@ -1,7 +1,7 @@
 :root {
   --fs-scale: 1.15;
-  --fs-unit: 1rem;
-  --fs-growth: 0.2vw;
+  --fs-unit: 0.75rem;
+  --fs-growth: 0.4vw;
   --fs-max: 1.5rem;
 
   --fs-xsm: calc(var(--fs-sm) / var(--fs-scale));
@@ -23,6 +23,7 @@
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --ff-mono: ui-monospace, Consolas, monospace;
   --ff-serif: ui-serif, serif;
+  color: #101010;
 }
 
 html {
@@ -33,7 +34,6 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 
-  line-height: 1.6;
   margin: 0;
   display: grid;
   place-content: start center;
@@ -43,6 +43,7 @@ body {
 main {
   padding: 0 1rem 2rem;
   font-family: var(--ff-serif);
+  margin-bottom: 5rem;
 }
 
 @media (width>=52rem) {
@@ -77,7 +78,18 @@ h3 {
   text-wrap: balance;
 }
 
-nav ul {
+.nav {
+  border: 1px solid #aaa;
+  border-top: 0;
+}
+
+@media (width>=52rem) {
+  .nav {
+    min-width: 52rem;
+  }
+}
+
+.nav ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -85,21 +97,102 @@ nav ul {
   justify-content: space-evenly;
 }
 
-nav li {
+.nav li {
   flex: 1 1 0;
   text-align: center;
   display: flex;
 }
 
-nav a {
+.nav a {
   flex: 1 1 0;
   text-decoration: none;
-  padding: 0.5rem 0 1.5rem;
+  padding: 1rem 0;
+  font-size: var(--fs-sm);
 }
 
-nav a:focus,
-nav a:hover {
+.nav li + * {
+  border-left: 1px solid #aaa;
+}
+
+.nav a:focus,
+.nav a:hover {
   background-color: #eeeeee;
   text-decoration: underline;
   padding: 1rem 0;
+}
+
+.welcome_message_box {
+  padding: 2rem 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.welcome_message_heading {
+  margin: 0;
+  font-size: var(--fs-h5);
+  line-height: 1.2;
+}
+
+.welcome_description {
+  margin: 0;
+  line-height: 1.4;
+  font-family: var(--ff-sans);
+  font-size: var(--fs-sm);
+}
+
+.posts {
+  display: grid;
+  row-gap: 1rem;
+}
+
+.post {
+  display: grid;
+  gap: 1rem;
+}
+
+.post + * {
+  padding-top: 1rem;
+  border-top: 1px solid black;
+}
+
+.post_intro_head {
+  padding-bottom: 1rem;
+  font-size: calc(var(--fs-base) * 0.96);
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  margin: 0;
+}
+
+.post_title {
+  margin: 0;
+  font-size: var(--fs-h5);
+  font-family: var(--ff-serif);
+}
+
+.post_body {
+  line-height: 1.6;
+  margin: 0;
+  font-size: var(--fs-base);
+  font-family: var(--ff-sans);
+  color: #333;
+}
+
+.post_metadata {
+  display: flex;
+
+  gap: 1em;
+  justify-content: space-between;
+  font-size: var(--fs-sm);
+  color: #333;
+}
+
+.post_time {
+  margin: 0;
+}
+
+.club_recruitment_message {
+  margin: 0;
+  color: #333;
+  font-size: var(--fs-sm);
+  font-style: italic;
 }

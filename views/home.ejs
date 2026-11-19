@@ -9,54 +9,58 @@
   <body>
     <%- include('partials/nav') %>
     <main>
-      <h1>Welcome to the homepage<%= locals.user?` ${user.first_name} ${user.last_name} (${user.username})`: '' %>!</h1>
-
-      <% if (locals.user?.is_new_member) { %>
-      <dialog open closedby="any">
-        <form method="dialog">
-          <span aria-live="polite">Congratulation on joining the club. Get acquainted with your fellow club members by reading their posts or by creating your own posts to share.</span>
-          <div><button type="submit" autofocus>Ok</button></div>
-        </form>
-      </dialog>
-      <% } %>
-
-      <% if (locals.user) { %>
-      <p>Have something in mind that you would like to share? Then, feel free to share it with a <a href="./new_post">new post.</a></p>
-      <% } else { %>
-      <p><a href="./login">Log in</a> to create a new post if you already have an account. Otherwise, feel free to <a href="./signup">sign up</a> for an account.</p>
-      <% } %>
+      <div class="welcome_message_box">
+        <h1 class="welcome_message_heading">Welcome to the homepage<%= locals.user?` ${user.first_name} ${user.last_name} (${user.username})`: '' %>!</h1>
+        
+        <% if (locals.user?.is_new_member) { %>
+        <dialog open closedby="any">
+          <form method="dialog">
+            <span aria-live="polite">Congratulation on joining the club. Get acquainted with your fellow club members by reading their posts or by creating your own posts to share.</span>
+            <div><button type="submit" autofocus>Ok</button></div>
+          </form>
+        </dialog>
+        <% } %>
+      
+        <% if (locals.user) { %>
+        <p class="welcome_description">Have something in mind that you would like to share? Then, feel free to share it with a <a href="./new_post">new post.</a></p>
+        <% } else { %>
+        <p class="welcome_description"><a href="./login">Log in</a> to create a new post if you already have an account. Otherwise, feel free to <a href="./signup">sign up</a> for an account.</p>
+        <% } %>
+      </div>
 
       <% if (locals.posts.length) { %>
-      <h2>(<%= posts.length %>) Post<%=posts.length>1?'s':''%>:</h2>
+      <h2 class="post_intro_head">(<%= posts.length %>) Post<%=posts.length>1?'s':''%>:</h2>
 
-      <% posts.forEach(post => { %>
-      <article class="post">
-        <h3><%= post.title %></h3>
-        <p><%= post.body %></p>
-
-        <% if (locals.user?.is_member || locals.user?.username === post.username) { %>
-        <address>Authored by: <%= post.first_name %> <%= post.last_name %> (<a href="mailto:<%= post.username %>"><%= post.username %></a>)</address>
-        <p>Posted at <time datetime="<%= post.created_at.toISOString() %>"><%= post.created_at.toUTCString() %></time>.</p>
-        <% } else if (locals.user) { %>
-        <p><a href="./join_club">Join the club</a> to become a member and to see the author's name and time of this post.</p>
-        <% } %>
-
-        <% if (locals.user?.is_admin) { %>
-        <form action="/delete_post" method="post">
-          <input
-            type="hidden"
-            value="<%= post.post_id %>"
-            name="post_id"
-            aria-hidden="true"
-          >
-          <button
-            type="submit"
-            onclick="return confirm('Are you sure you want to delete this post?')"
-          >Delete post</button>
-        </form>
-        <% } %>
-      </article>
-      <% }) %>
+      <div class="posts">
+        <% posts.forEach(post => { %>
+        <article class="post">
+          <h3 class="post_title"><%= post.title %></h3>
+          <p class="post_body"><%= post.body %></p>
+          <% if (locals.user?.is_member || locals.user?.username === post.username) { %>
+          <div class="post_metadata">
+            <address>Authored by: <%= post.first_name %> <%= post.last_name %> (<a href="mailto:<%= post.username %>"><%= post.username %></a>)</address>
+            <p class="post_time">Posted at <time datetime="<%= post.created_at.toISOString() %>"><%= post.created_at.toUTCString() %></time></p>
+          </div>
+          <% } else if (locals.user) { %>
+          <p class="club_recruitment_message"><a href="./join_club">Join the club</a> to see the author's name and post time.</p>
+          <% } %>
+          <% if (locals.user?.is_admin) { %>
+          <form action="/delete_post" method="post">
+            <input
+              type="hidden"
+              value="<%= post.post_id %>"
+              name="post_id"
+              aria-hidden="true"
+            >
+            <button
+              type="submit"
+              onclick="return confirm('Are you sure you want to delete this post?')"
+            >Delete post</button>
+          </form>
+          <% } %>
+        </article>
+        <% }) %>
+      </div>
       <% } else { %>
       <p>No posts have been created.</p>
       <% } %>
