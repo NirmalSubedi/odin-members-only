@@ -298,3 +298,28 @@ h3 {
 .error_field_link:hover {
   text-decoration: underline;
 }
+
+.dialog {
+  position: fixed;
+  padding: 0.5rem 1rem;
+}
+
+.dialog_message {
+  font-family: var(--ff-serif);
+  font-size: var(--fs-h6);
+  font-weight: 600;
+}
+
+.dialog_btn {
+  font-family: var(--ff-sans);
+  font-size: var(--fs-base);
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  border: 1px solid #101010;
+  background: #fff;
+  margin-bottom: 0.5em;
+}
+
+.dialog_btn:hover {
+  background: #eeeeee;
+}

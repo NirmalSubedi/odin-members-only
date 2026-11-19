@@ -13,10 +13,10 @@
       <div class="form_layout_box">
         <h1 class="form_heading">Log in</h1>
           <% if (locals.session?.is_auth_fail) { %>
-          <dialog open closedby="closerequest">
+          <dialog open closedby="closerequest" class="dialog">
             <form method="dialog">
-              <span aria-live="assertive">You first must login to access that resource.</span>
-              <div><button type="submit" autofocus>Ok</button></div>
+              <p aria-live="assertive" class="dialog_message">You first must login to access that resource.</p>
+              <button type="submit" autofocus class="dialog_btn">Ok</button>
             </form>
           </dialog>
           <% } %>
