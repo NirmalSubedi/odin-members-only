@@ -1,6 +1,6 @@
 import pg_simple from "connect-pg-simple";
 import session from "express-session";
-import { NODE_ENV, SESSION_COOKIE_MAX_AGE, SESSION_SECRET } from "../config.js";
+import { SESSION_COOKIE_MAX_AGE, SESSION_SECRET } from "../config.js";
 import { pool } from "../db/pool.js";
 
 const session_store = pg_simple(session);
